@@ -76,19 +76,19 @@ export function GoldJourney() {
             start: "top top",
             endTrigger: testimonialsEl,
             end: "bottom top",
-            scrub: isMobile ? 0.2 : 0.5,
+            scrub: isMobile ? true : 0.4,
             invalidateOnRefresh: !isMobile,
           },
         });
 
         // Continuous 3D orbit rotation spanning the entire experience (0 to 100)
         tl.fromTo(q(".gj-orbit"), { rotate: 0 }, { rotate: 360, duration: 100 }, 0);
-        tl.fromTo(q(".gj-scene"), { scale: 1.02 }, { scale: 0.98, duration: 100 }, 0);
+        tl.fromTo(q(".gj-scene"), { scale: 1.01 }, { scale: 0.99, duration: 100 }, 0);
 
         // =========================================================================
         // PHASE 1 (0–14%): HERO — Radiant bangle only
         // =========================================================================
-        tl.fromTo(q(".gj-bangle"), { scale: isMobile ? 1.08 : 1.15, autoAlpha: 1 }, { scale: 0.95, duration: 14 }, 0);
+        tl.to(q(".gj-bangle"), { scale: 0.95, duration: 14 }, 0);
 
         // =========================================================================
         // PHASE 2 (14–48%): Services, How It Works, Pledged, Mobile

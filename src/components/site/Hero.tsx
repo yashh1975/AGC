@@ -58,12 +58,6 @@ export function Hero() {
           className="mb-3 sm:mb-4 h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full object-cover shadow-[0_0_20px_rgba(212,175,55,0.4)] ring-2 ring-gold/60 shrink-0"
         />
 
-        {/* Soft, feathered cinematic contrast shadow aura behind text without CPU blur */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 h-[110%] w-[125%] max-w-[620px] rounded-[50%] [background:radial-gradient(ellipse_at_50%_50%,rgba(20,5,0,0.78)_0%,rgba(40,10,2,0.5)_28%,rgba(60,18,3,0.18)_55%,transparent_80%)] -z-10"
-        />
-
         {/* Company Name - Adaptive Responsive Sizing (desktop: text-7xl, mobile: text-4xl) */}
         <h1 className="text-balance font-display text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-[0.05em] sm:tracking-[0.07em] leading-[1.08] drop-shadow-[0_6px_24px_rgba(0,0,0,0.95)] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
           <span className="text-gold-metal">{business.name}</span>
