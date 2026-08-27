@@ -18,24 +18,24 @@ export function Hero() {
       className="relative flex min-h-[100vh] min-h-[100dvh] flex-col items-center justify-center px-4 py-16 sm:py-20 text-center overflow-hidden"
       aria-label="Anjaneya Gold Company"
     >
-      {/* 1. Radiant Terracotta-Amber Radiant Ambient Background (exact match to reference image) */}
+      {/* 1. Radiant Terracotta-Amber Radiant Ambient Background (clean gradient without CPU blur filter) */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden [transform:translate3d(0,0,0)]"
       >
-        <div className="absolute h-[120vmin] w-[120vmin] max-w-[1300px] max-h-[1300px] rounded-full [background:radial-gradient(circle_at_50%_46%,rgba(240,110,15,0.45)_0%,rgba(190,70,5,0.3)_35%,rgba(120,35,2,0.15)_60%,transparent_78%)] blur-3xl" />
-        <div className="absolute top-[8%] right-[8%] h-[65vmin] w-[65vmin] rounded-full [background:radial-gradient(circle,rgba(255,140,20,0.32)_0%,transparent_70%)] blur-3xl" />
+        <div className="absolute h-[120vmin] w-[120vmin] max-w-[1300px] max-h-[1300px] rounded-full [background:radial-gradient(circle_at_50%_46%,rgba(240,110,15,0.45)_0%,rgba(190,70,5,0.28)_25%,rgba(120,35,2,0.12)_50%,transparent_72%)]" />
+        <div className="absolute top-[8%] right-[8%] h-[65vmin] w-[65vmin] rounded-full [background:radial-gradient(circle,rgba(255,140,20,0.30)_0%,rgba(200,80,10,0.12)_35%,transparent_65%)]" />
       </div>
 
-      {/* 2. Delicate Orbital Ring Framing with ONE Single Gold Point at top-right (exact match to reference image) */}
+      {/* 2. Delicate Orbital Ring Framing with ONE Single Gold Point at top-right */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
+        className="pointer-events-none absolute inset-0 flex items-center justify-center [transform:translate3d(0,0,0)]"
       >
-        <div className="bangle-frame relative aspect-square h-[82vmin] w-[82vmin] max-w-[92vw] max-h-[92vw] rounded-full border border-gold/30 [box-shadow:0_0_60px_rgba(212,175,55,0.18),inset_0_0_80px_rgba(255,157,50,0.12)]">
+        <div className="bangle-frame relative aspect-square h-[82vmin] w-[82vmin] max-w-[92vw] max-h-[92vw] rounded-full border border-gold/30 [box-shadow:0_0_40px_rgba(212,175,55,0.15),inset_0_0_50px_rgba(255,157,50,0.1)]">
           <span className="absolute inset-[3%] rounded-full border border-gold/20" />
-          {/* Exactly ONE gold point at top-right (1 o'clock) as shown in reference image */}
-          <span className="absolute top-[7%] right-[32%] h-2.5 w-2.5 rounded-full bg-gold shadow-[0_0_16px_#FFF0C2,0_0_28px_#FF9D32]" />
+          {/* Exactly ONE gold point at top-right (1 o'clock) */}
+          <span className="absolute top-[7%] right-[32%] h-2.5 w-2.5 rounded-full bg-gold shadow-[0_0_12px_#FFF0C2,0_0_20px_#FF9D32]" />
         </div>
       </div>
 
@@ -44,7 +44,7 @@ export function Hero() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 flex flex-col items-center justify-center text-center w-full max-w-[380px] xs:max-w-[480px] sm:max-w-3xl md:max-w-4xl px-3 sm:px-6"
+        className="relative z-10 flex flex-col items-center justify-center text-center w-full max-w-[380px] xs:max-w-[480px] sm:max-w-3xl md:max-w-4xl px-3 sm:px-6 [transform:translate3d(0,0,0)]"
       >
         {/* Logo - Adaptive Responsive Sizing */}
         <img
@@ -52,13 +52,16 @@ export function Hero() {
           alt="Anjaneya Gold Company logo"
           width={453}
           height={453}
-          className="mb-3 sm:mb-4 h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full object-cover shadow-[0_0_24px_rgba(212,175,55,0.5)] ring-2 ring-gold/60 shrink-0"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          className="mb-3 sm:mb-4 h-20 w-20 xs:h-24 xs:w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 rounded-full object-cover shadow-[0_0_20px_rgba(212,175,55,0.4)] ring-2 ring-gold/60 shrink-0"
         />
 
-        {/* Soft, feathered cinematic contrast shadow aura behind text to lift typography off the 3D gold bangle */}
+        {/* Soft, feathered cinematic contrast shadow aura behind text without CPU blur */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 h-[110%] w-[125%] max-w-[620px] rounded-[50%] [background:radial-gradient(ellipse_at_50%_50%,rgba(20,5,0,0.72)_0%,rgba(40,10,2,0.48)_38%,rgba(60,18,3,0.18)_65%,transparent_85%)] blur-2xl -z-10"
+          className="pointer-events-none absolute left-1/2 top-[52%] -translate-x-1/2 -translate-y-1/2 h-[110%] w-[125%] max-w-[620px] rounded-[50%] [background:radial-gradient(ellipse_at_50%_50%,rgba(20,5,0,0.78)_0%,rgba(40,10,2,0.5)_28%,rgba(60,18,3,0.18)_55%,transparent_80%)] -z-10"
         />
 
         {/* Company Name - Adaptive Responsive Sizing (desktop: text-7xl, mobile: text-4xl) */}

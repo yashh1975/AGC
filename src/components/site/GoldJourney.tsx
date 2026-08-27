@@ -120,15 +120,13 @@ export function GoldJourney() {
         // ALL 5 Ornaments (bangle + ring + chain + earrings + necklace) converge into the furnace heat chamber
         tl.to(q(".gj-jewel, .gj-bangle"), { x: 0, y: 0, scale: 0.75, duration: 3.5, ease: "power2.inOut" }, 50);
 
-        // Melting into liquid gold (gentle, warm gold transition without blinding glare)
+        // Melting into liquid gold (scale & fade into heat chamber)
         tl.to(
           q(".gj-jewel, .gj-bangle"),
-          { scaleY: 0.35, scaleX: 1.25, filter: "brightness(1.25) drop-shadow(0 0 15px rgba(212,175,55,0.4))", duration: 2.5 },
+          { scaleY: 0.35, scaleX: 1.2, autoAlpha: 0, duration: 3, ease: "power2.in" },
           53.5,
         );
-        // Explicitly fade out and hide ALL jewelry (including bangle) completely!
-        tl.to(q(".gj-jewel, .gj-bangle"), { autoAlpha: 0, duration: 1.5 }, 55.5);
-        tl.fromTo(q(".gj-molten"), { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 0.45, scale: 1, duration: 2 }, 54.5);
+        tl.fromTo(q(".gj-molten"), { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 0.55, scale: 1, duration: 2.5 }, 54.5);
 
         // Molten stream pours into mould
         tl.fromTo(q(".gj-mould"), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 2 }, 56.5);
@@ -140,7 +138,7 @@ export function GoldJourney() {
         tl.fromTo(
           q(".gj-bar"),
           { autoAlpha: 0, y: 60, scale: 0.6, rotate: -8 },
-          { autoAlpha: 1, y: 0, scale: isMobile ? 0.95 : 1.05, rotate: 3, duration: 3, ease: "power2.out" },
+          { autoAlpha: 1, y: 0, scale: isMobile ? 0.95 : 1.05, rotate: 3, duration: 3.5, ease: "power2.out" },
           60,
         );
         tl.to(q(".gj-mould"), { autoAlpha: 0, y: 60, duration: 2 }, 62);
@@ -154,14 +152,18 @@ export function GoldJourney() {
         tl.to(q(".gj-bar"), { rotate: -4, y: -10, duration: 15 }, 64);
 
         // Soft, subtle golden energy burst around the bar
-        tl.fromTo(q(".gj-burst"), { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 0.35, scale: isMobile ? 1.05 : 1.2, duration: 3 }, 74);
+        tl.fromTo(q(".gj-burst"), { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 0.4, scale: isMobile ? 1.05 : 1.2, duration: 3 }, 74);
 
         // =========================================================================
         // PHASE 5 (80–96%): TESTIMONIALS — Gold Bar converts directly to Hands with Money
         // Direct Transformation: Gold Bar -> Customer Hands Holding Money
         // =========================================================================
-        // Gold Bar dissolves in a flash of bright light
-        tl.to(q(".gj-bar"), { autoAlpha: 0, scale: 1.2, filter: "brightness(2.5) blur(10px)", duration: 2.5 }, 79);
+        // Gold Bar dissolves cleanly with scale & opacity (100% reversible)
+        tl.to(q(".gj-bar"), { autoAlpha: 0, scale: 1.18, y: -18, duration: 2.5, ease: "power2.in" }, 78.5);
+
+        // Golden burst pulse
+        tl.to(q(".gj-burst"), { autoAlpha: 0.65, scale: 1.35, duration: 1.5 }, 78.5);
+        tl.to(q(".gj-burst"), { autoAlpha: 0, duration: 2 }, 80);
 
         // Hands with Money appear in the exact center spot, holding cash & coins
         tl.fromTo(
