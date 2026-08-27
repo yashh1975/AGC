@@ -1,0 +1,14 @@
+{
+  "name": "Anjaneya Gold Company",
+  "short_name": "AGC",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#180500",
+  "background_color": "#180500",
+  "display": "standalone"
+}
