@@ -207,18 +207,18 @@ export function GoldJourney() {
   }, []);
 
   const jewelClass =
-    "gj-jewel absolute h-[18vh] max-w-[40vw] sm:h-[32vh] sm:max-w-[50vw] w-auto object-contain drop-shadow-[0_15px_35px_rgba(212,175,55,0.45)] will-change-[opacity,transform] transform-gpu opacity-0 invisible";
+    "gj-jewel absolute h-[18vh] max-w-[40vw] sm:h-[32vh] sm:max-w-[50vw] w-auto object-contain [filter:drop-shadow(0_10px_25px_rgba(212,175,55,0.4))] [transform:translate3d(0,0,0)] [backface-visibility:hidden] will-change-[opacity,transform] transform-gpu opacity-0 invisible";
 
   return (
-    <div ref={root} aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu">
+    <div ref={root} aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu [contain:paint]">
       {/* Background ambience — vibrant warm terracotta-amber radiance matching reference image */}
-      <div className="absolute inset-0 [background:radial-gradient(ellipse_115%_95%_at_50%_46%,#c85305_0%,#9e3902_28%,#662002_55%,#380f01_80%,#180500_100%)]" />
+      <div className="absolute inset-0 [background:radial-gradient(ellipse_115%_95%_at_50%_46%,#c85305_0%,#9e3902_28%,#662002_55%,#380f01_80%,#180500_100%)] [transform:translate3d(0,0,0)]" />
       <div className="absolute inset-0 [background:radial-gradient(circle_at_82%_32%,rgba(245,120,20,0.38)_0%,transparent_60%)]" />
       <div className="absolute inset-0 [background:radial-gradient(circle_at_18%_68%,rgba(190,65,5,0.25)_0%,transparent_65%)]" />
 
-      <div className="gj-scene pointer-events-none absolute inset-0 flex items-center justify-center will-change-transform transform-gpu">
+      <div className="gj-scene pointer-events-none absolute inset-0 flex items-center justify-center will-change-transform transform-gpu [transform:translate3d(0,0,0)]">
         {/* Central 3D Orbit containing all 5 Gold Jewelry Ornaments */}
-        <div className="gj-orbit pointer-events-none relative flex h-[76vmin] w-[76vmin] max-w-[85vw] max-h-[85vw] items-center justify-center will-change-transform transform-gpu">
+        <div className="gj-orbit pointer-events-none relative flex h-[76vmin] w-[76vmin] max-w-[85vw] max-h-[85vw] items-center justify-center will-change-transform transform-gpu [transform:translate3d(0,0,0)]">
           {/* 1. Main Hero Bangle */}
           <img
             src={bangle}
@@ -227,7 +227,8 @@ export function GoldJourney() {
             height={1024}
             fetchPriority="high"
             loading="eager"
-            className="gj-jewel gj-bangle absolute h-[26vh] max-w-[70vw] sm:h-[48vh] sm:max-w-[80vw] w-auto object-contain drop-shadow-[0_25px_60px_rgba(212,175,55,0.7),0_0_80px_rgba(255,157,50,0.35)] will-change-[opacity,transform] transform-gpu"
+            decoding="async"
+            className="gj-jewel gj-bangle absolute h-[26vh] max-w-[70vw] sm:h-[48vh] sm:max-w-[80vw] w-auto object-contain [filter:drop-shadow(0_15px_35px_rgba(212,175,55,0.6))] [transform:translate3d(0,0,0)] [backface-visibility:hidden] will-change-[opacity,transform] transform-gpu"
           />
 
           {/* 2. Solitaire Gold Ring */}
@@ -236,7 +237,8 @@ export function GoldJourney() {
             alt="Pure Gold Ring"
             width={1024}
             height={1024}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             style={{ opacity: 0, visibility: "hidden" }}
             className={`gj-ring ${jewelClass}`}
           />
@@ -247,7 +249,8 @@ export function GoldJourney() {
             alt="22K Gold Rope Chain"
             width={1024}
             height={1024}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             style={{ opacity: 0, visibility: "hidden" }}
             className={`gj-chain ${jewelClass}`}
           />
@@ -258,7 +261,8 @@ export function GoldJourney() {
             alt="Traditional Gold Earrings"
             width={1024}
             height={1024}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             style={{ opacity: 0, visibility: "hidden" }}
             className={`gj-earrings ${jewelClass}`}
           />
@@ -269,7 +273,8 @@ export function GoldJourney() {
             alt="Royal Gold Necklace"
             width={1024}
             height={1024}
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             style={{ opacity: 0, visibility: "hidden" }}
             className={`gj-necklace ${jewelClass}`}
           />
@@ -341,32 +346,34 @@ export function GoldJourney() {
           alt="999.9 Fine Gold Bar"
           width={1024}
           height={1024}
-          loading="lazy"
+          loading="eager"
+          decoding="async"
           style={{ opacity: 0, visibility: "hidden" }}
-          className="gj-bar absolute h-[22vh] max-w-[65vw] sm:h-[38vh] w-auto object-contain drop-shadow-[0_20px_50px_rgba(212,175,55,0.55)] will-change-[opacity,transform] transform-gpu opacity-0 invisible"
+          className="gj-bar absolute h-[24vh] max-w-[70vw] sm:h-[38vh] w-auto object-contain [filter:drop-shadow(0_15px_40px_rgba(212,175,55,0.6))] [transform:translate3d(0,0,0)] [backface-visibility:hidden] will-change-[opacity,transform] transform-gpu opacity-0 invisible"
         />
 
         {/* Golden Energy Burst */}
         <div
           style={{ opacity: 0, visibility: "hidden" }}
-          className="gj-burst pointer-events-none absolute h-[40vh] w-[40vh] sm:h-[50vh] sm:w-[50vh] opacity-0 invisible transform-gpu"
+          className="gj-burst pointer-events-none absolute h-[40vh] w-[40vh] sm:h-[50vh] sm:w-[50vh] opacity-0 invisible transform-gpu [transform:translate3d(0,0,0)]"
         >
           <div className="absolute inset-0 rounded-full [background:radial-gradient(circle,rgba(212,175,55,0.25)_0%,rgba(158,53,0,0.12)_45%,transparent_70%)] blur-2xl" />
-          <GoldParticles density={mobile ? 0.4 : 0.8} drift={0.3} />
+          <GoldParticles density={mobile ? 0.3 : 0.6} drift={0.25} />
         </div>
 
         {/* Customer Hands Holding Money (Direct Gold Bar Conversion - Centered in Viewport) */}
         <div
           style={{ opacity: 0, visibility: "hidden" }}
-          className="gj-hand-group pointer-events-none absolute inset-0 flex items-center justify-center will-change-[opacity,transform] transform-gpu opacity-0 invisible"
+          className="gj-hand-group pointer-events-none absolute inset-0 flex items-center justify-center will-change-[opacity,transform] transform-gpu opacity-0 invisible [transform:translate3d(0,0,0)]"
         >
           <img
             src={handsReceive}
             alt="Customer Hands Holding Cash and Coins"
             width={1024}
             height={1024}
-            loading="lazy"
-            className="gj-hand-img h-[28vh] max-w-[82vw] sm:h-[48vh] w-auto object-contain drop-shadow-[0_20px_50px_rgba(255,180,60,0.65)] [mask-image:radial-gradient(circle_at_50%_55%,black_55%,transparent_85%)] will-change-[opacity,transform] transform-gpu"
+            loading="eager"
+            decoding="async"
+            className="gj-hand-img h-[28vh] max-w-[82vw] sm:h-[48vh] w-auto object-contain [filter:drop-shadow(0_15px_40px_rgba(255,180,60,0.6))] [mask-image:radial-gradient(circle_at_50%_55%,black_60%,transparent_90%)] [transform:translate3d(0,0,0)] [backface-visibility:hidden] will-change-[opacity,transform] transform-gpu"
           />
         </div>
       </div>
