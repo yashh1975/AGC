@@ -43,10 +43,10 @@ export function GoldParticles({
     const build = () => {
       cachedW = canvas.clientWidth || 300;
       cachedH = canvas.clientHeight || 300;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = mobile ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.max(1, Math.round(cachedW * dpr));
       canvas.height = Math.max(1, Math.round(cachedH * dpr));
-      const base = mobile ? 18 : 50;
+      const base = mobile ? 12 : 45;
       const count = Math.round(base * density);
       particles = Array.from({ length: count }, () => ({
         x: Math.random() * cachedW,
@@ -62,8 +62,10 @@ export function GoldParticles({
     const draw = () => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, cachedW, cachedH);
-      ctx.shadowBlur = mobile ? 2 : 4;
-      ctx.shadowColor = "rgba(255, 180, 60, 0.4)";
+      if (!mobile) {
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = "rgba(255, 180, 60, 0.4)";
+      }
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i]!;
         p.x += p.vx;

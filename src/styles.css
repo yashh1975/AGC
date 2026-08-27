@@ -109,10 +109,17 @@
   }
 
   html {
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     overflow-x: clip;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Only enable smooth scrolling on desktop devices with hover to avoid iOS touch drag snapbacks */
+  @media (hover: hover) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -124,6 +131,7 @@
     overflow-x: clip;
     width: 100%;
     min-height: 100%;
+    -webkit-overflow-scrolling: touch;
   }
 
   a,

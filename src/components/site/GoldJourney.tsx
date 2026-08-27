@@ -72,12 +72,12 @@ export function GoldJourney() {
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
-            trigger: document.documentElement,
+            trigger: document.body,
             start: "top top",
             endTrigger: testimonialsEl,
             end: "bottom top",
-            scrub: isMobile ? 0.4 : 0.6,
-            invalidateOnRefresh: true,
+            scrub: isMobile ? 0.2 : 0.5,
+            invalidateOnRefresh: !isMobile,
           },
         });
 
