@@ -10,6 +10,12 @@ import chain from "@/assets/jewel-chain.png";
 import goldBar from "@/assets/gold-bar.png";
 import handsReceive from "@/assets/hands-receive-cash.png";
 
+/**
+ * Master scroll-driven cinematic gold journey.
+ * MOBILE: Pure CSS animations — bangle rotation, orbital ring, glow pulses.
+ *         No GSAP, no scroll interception = butter-smooth 120fps native scrolling.
+ * DESKTOP: Full GSAP ScrollTrigger cinematic experience.
+ */
 export function GoldJourney() {
   const root = useRef<HTMLDivElement>(null);
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -22,7 +28,7 @@ export function GoldJourney() {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  // Only run GSAP ScrollTrigger on desktop — on mobile use pure CSS for zero-interrupt native scrolling
+  // Only run GSAP ScrollTrigger on desktop — never on mobile (it blocks native iOS momentum scroll)
   useEffect(() => {
     if (window.innerWidth < 768) return;
 
@@ -120,18 +126,53 @@ export function GoldJourney() {
     "gj-jewel absolute h-[18vh] max-w-[40vw] sm:h-[32vh] sm:max-w-[50vw] w-auto object-contain [filter:drop-shadow(0_10px_25px_rgba(212,175,55,0.4))] [transform:translate3d(0,0,0)] [backface-visibility:hidden] will-change-[opacity,transform] transform-gpu opacity-0 invisible";
 
   // ─────────────────────────────────────────────────────────────────────────
-  // MOBILE: Pure static render — no GSAP, no scroll interception, no fixed
-  // Use 100dvh to respect iOS Safari dynamic viewport for perfect centering
+  // MOBILE: Rich CSS-only animation — no GSAP, no scroll interception.
+  // CSS animations run on the GPU compositor thread = zero scroll impact.
+  // 100dvh = iOS Safari dynamic viewport (respects address bar).
   // ─────────────────────────────────────────────────────────────────────────
   if (isMobileDevice) {
     return (
-      <div aria-hidden className="pointer-events-none fixed inset-x-0 top-0 z-0 transform-gpu"
-        style={{ height: "100dvh" }}>
-        {/* Background */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-x-0 top-0 z-0 transform-gpu"
+        style={{ height: "100dvh" }}
+      >
+        {/* Warm amber background gradient */}
         <div className="absolute inset-0 [background:radial-gradient(ellipse_115%_95%_at_50%_46%,#c85305_0%,#9e3902_28%,#662002_55%,#380f01_80%,#180500_100%)]" />
         <div className="absolute inset-0 [background:radial-gradient(circle_at_82%_32%,rgba(245,120,20,0.38)_0%,transparent_60%)]" />
         <div className="absolute inset-0 [background:radial-gradient(circle_at_18%_68%,rgba(190,65,5,0.25)_0%,transparent_65%)]" />
-        {/* Perfectly centered bangle using dvh-based centering */}
+
+        {/* Pulsing ambient glow behind bangle — pure CSS animation */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ willChange: "transform" }}
+        >
+          <div
+            className="h-[62vw] w-[62vw] rounded-full [background:radial-gradient(circle,rgba(255,157,50,0.35)_0%,rgba(212,87,5,0.18)_45%,transparent_70%)]"
+            style={{ animation: "pulse-glow 3s ease-in-out infinite" }}
+          />
+        </div>
+
+        {/* Outer orbital ring — slow CSS rotation */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className="h-[74vw] w-[74vw] rounded-full border border-[rgba(212,175,55,0.3)] [box-shadow:0_0_30px_rgba(212,175,55,0.12),inset_0_0_40px_rgba(255,157,50,0.08)] flex items-center justify-center"
+            style={{ animation: "spin-cw 28s linear infinite", willChange: "transform" }}
+          >
+            {/* Single gold point on the orbital ring */}
+            <span className="absolute top-[5%] right-[28%] h-2.5 w-2.5 rounded-full bg-[#E2BA55] [box-shadow:0_0_10px_#FFF0C2,0_0_18px_#FF9D32]" />
+          </div>
+        </div>
+
+        {/* Inner orbital ring — slightly faster, opposite visual feel */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className="h-[60vw] w-[60vw] rounded-full border border-[rgba(212,175,55,0.15)]"
+            style={{ animation: "spin-cw 48s linear infinite reverse", willChange: "transform" }}
+          />
+        </div>
+
+        {/* Main Bangle — gentle float animation */}
         <div className="absolute inset-0 flex items-center justify-center">
           <img
             src={bangle}
@@ -141,11 +182,13 @@ export function GoldJourney() {
             fetchPriority="high"
             loading="eager"
             decoding="async"
-            className="h-[52vw] w-[52vw] object-contain [filter:drop-shadow(0_10px_30px_rgba(212,175,55,0.55))] opacity-90"
+            className="h-[50vw] w-[50vw] object-contain [filter:drop-shadow(0_10px_30px_rgba(212,175,55,0.6))_drop-shadow(0_0_50px_rgba(200,83,5,0.4))]"
+            style={{ animation: "floaty 5s ease-in-out infinite", willChange: "transform" }}
           />
         </div>
+
         {/* Ambient particles */}
-        <GoldParticles className="opacity-50" density={0.2} />
+        <GoldParticles className="opacity-50" density={0.25} />
         <div className="absolute inset-0 pointer-events-none vignette" />
       </div>
     );
