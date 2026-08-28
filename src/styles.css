@@ -372,3 +372,11 @@ select option:checked {
     animation: none;
   }
 }
+
+/* XRF scanner beam sweep — triggered once via inView on mobile */
+@keyframes xrf-scan {
+  0%   { top: 4%; }
+  50%  { top: 86%; }
+  80%  { top: 86%; }
+  100% { top: 86%; }
+}

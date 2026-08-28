@@ -117,13 +117,16 @@ export function RepledgeGold() {
 
 export function MobileService() {
   const ref = useRef<HTMLDivElement>(null);
-  // On mobile: skip useScroll to avoid continuous scroll listeners causing jank
+  // On mobile: useInView fires once — no continuous scroll listener
+  const inView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
+
+  // Desktop only: scroll-driven
   const { scrollYProgress } = useScroll({
     target: isMobile ? undefined : ref,
     offset: ["start 85%", "end 40%"],
   });
-  const vanX = useTransform(scrollYProgress, [0, 1], isMobile ? ["40%", "40%"] : ["4%", "78%"]);
-  const pathScale = useTransform(scrollYProgress, [0, 1], isMobile ? [0.4, 0.4] : [0, 1]);
+  const vanX = useTransform(scrollYProgress, [0, 1], ["4%", "78%"]);
+  const pathScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
     <Section id="mobile-service" labelledBy="mobile-title" className="veil">
@@ -142,14 +145,37 @@ export function MobileService() {
           <GoldParticles density={isMobile ? 0 : 0.3} />
           <div className="relative h-20 sm:h-28">
             <div aria-hidden className="absolute inset-x-0 top-1/2 h-px bg-ink/40" />
-            <motion.div
-              aria-hidden
-              style={{ scaleX: pathScale }}
-              className="absolute inset-x-0 top-1/2 h-px origin-left bg-gold-light shadow-[0_0_16px_var(--gold)]"
-            />
-            <motion.div style={{ left: vanX }} className="absolute top-1/2 -translate-y-1/2">
-              <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]" aria-hidden />
-            </motion.div>
+
+            {isMobile ? (
+              <>
+                {/* Path line — grows from left via CSS transition */}
+                <div
+                  aria-hidden
+                  className="absolute inset-x-0 top-1/2 h-px origin-left bg-gold-light shadow-[0_0_16px_var(--gold)] transition-transform duration-[1200ms] ease-out"
+                  style={{ transform: inView ? "scaleX(1)" : "scaleX(0)" }}
+                />
+                {/* Truck — slides from 4% to 78% via CSS transition */}
+                <div
+                  className="absolute top-1/2 -translate-y-1/2 transition-[left] duration-[1400ms] ease-out"
+                  style={{ left: inView ? "78%" : "4%" }}
+                >
+                  <Truck className="h-6 w-6 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]" aria-hidden />
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Desktop: scroll-scrubbed */}
+                <motion.div
+                  aria-hidden
+                  style={{ scaleX: pathScale }}
+                  className="absolute inset-x-0 top-1/2 h-px origin-left bg-gold-light shadow-[0_0_16px_var(--gold)]"
+                />
+                <motion.div style={{ left: vanX }} className="absolute top-1/2 -translate-y-1/2">
+                  <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]" aria-hidden />
+                </motion.div>
+              </>
+            )}
+
             <MapPin
               className="absolute right-2 sm:right-4 top-1/2 h-6 w-6 sm:h-7 sm:w-7 -translate-y-full text-ivory drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
               aria-hidden
@@ -183,6 +209,7 @@ export function MobileService() {
 }
 
 const whyIcons = [ShieldCheck, Gauge, BadgeCheck, Truck] as const;
+
 
 export function WhyUs() {
   return (
