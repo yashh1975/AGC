@@ -1,29 +1,18 @@
 import { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Arrow, GoldLink, Reveal, Section, SectionHeading } from "./primitives";
 import { GoldParticles } from "./GoldParticles";
 import { howItWorks } from "@/lib/site";
 import goldBar from "@/assets/gold-bar.png";
 import chain from "@/assets/jewel-chain.png";
 
-const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-
-// ─── HowItWorks ──────────────────────────────────────────────────────────────
-// Mobile: useInView triggers a one-shot scaleY animation (no continuous scroll listener)
-// Desktop: useScroll drives scaleY proportionally to scroll position
 export function HowItWorks() {
   const ref = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-
-  // Desktop: scroll-driven
   const { scrollYProgress } = useScroll({
-    target: isMobile ? undefined : ref,
+    target: ref,
     offset: ["start 75%", "end 60%"],
   });
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
-  // Mobile: fires once when the list enters the viewport
-  const inView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
 
   return (
     <Section id="how-it-works" labelledBy="how-title" className="veil">
@@ -41,22 +30,11 @@ export function HowItWorks() {
 
         <div ref={ref} className="relative mt-12 sm:mt-16">
           <div aria-hidden className="absolute bottom-0 left-5 sm:left-7 top-0 w-0.5 -translate-x-1/2 bg-gold/15" />
-          {isMobile ? (
-            // Mobile: CSS transition triggered by inView — zero scroll listener
-            <div
-              ref={lineRef}
-              aria-hidden
-              className="absolute bottom-0 left-5 top-0 w-0.5 -translate-x-1/2 origin-top bg-gold shadow-[0_0_12px_var(--gold)] transition-transform duration-[1800ms] ease-out"
-              style={{ transform: inView ? "scaleY(1)" : "scaleY(0)" }}
-            />
-          ) : (
-            // Desktop: scroll-scrubbed
-            <motion.div
-              aria-hidden
-              style={{ scaleY: lineScale }}
-              className="absolute bottom-0 left-5 sm:left-7 top-0 w-0.5 -translate-x-1/2 origin-top bg-gold shadow-[0_0_12px_var(--gold)]"
-            />
-          )}
+          <motion.div
+            aria-hidden
+            style={{ scaleY: lineScale }}
+            className="absolute bottom-0 left-5 sm:left-7 top-0 w-0.5 -translate-x-1/2 origin-top bg-gold shadow-[0_0_12px_var(--gold)]"
+          />
 
           <ol className="space-y-6 sm:space-y-8">
             {howItWorks.map((step, i) => (
@@ -66,7 +44,7 @@ export function HowItWorks() {
                     aria-hidden
                     className="absolute left-5 sm:left-7 top-1.5 sm:top-2 h-4 w-4 sm:h-5 sm:w-5 -translate-x-1/2 rounded-full border border-gold bg-ink shadow-[0_0_10px_var(--gold)]"
                   />
-                  <div className="flex-1 rounded-2xl border border-gold/20 bg-[rgba(18,3,0,0.85)] p-5 xs:p-6 sm:p-7 shadow-xl">
+                  <div className="flex-1 glass-panel rounded-2xl p-5 xs:p-6 sm:p-7 shadow-xl">
                     <span className="font-display text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                       {step.n}
                     </span>
@@ -87,23 +65,19 @@ export function HowItWorks() {
   );
 }
 
-// ─── XRFTesting ──────────────────────────────────────────────────────────────
-// Mobile: beam animates top→bottom once via CSS animation on inView
-// Desktop: scroll-scrubbed beam position + bar widths
 export function XRFTesting() {
   const ref = useRef<HTMLDivElement>(null);
-
-  // Desktop only: scroll-driven
   const { scrollYProgress } = useScroll({
-    target: isMobile ? undefined : ref,
+    target: ref,
     offset: ["start 85%", "end 15%"],
   });
+  
+  // Maps 1:1 with user scroll position across the full height of the gold chain without CPU spring physics
   const beamY = useTransform(scrollYProgress, [0, 1], ["4%", "86%"]);
+
+  // Proportional smooth fill for purity and weight meters based on scroll level
   const purityWidth = useTransform(scrollYProgress, [0.06, 0.55], ["0%", "91.6%"]);
   const weightWidth = useTransform(scrollYProgress, [0.1, 0.6], ["0%", "85%"]);
-
-  // Mobile: one-shot inView trigger
-  const inView = useInView(ref, { once: true, margin: "-5% 0px -5% 0px" });
 
   return (
     <Section id="gold-testing" labelledBy="xrf-title" className="veil">
@@ -120,9 +94,19 @@ export function XRFTesting() {
           ref={ref}
           className="relative min-h-[380px] xs:min-h-[420px] sm:min-h-[470px] overflow-hidden rounded-2xl border border-gold/30 bg-ink shadow-[0_20px_60px_rgba(0,0,0,0.8),0_0_30px_rgba(212,175,55,0.15)] flex flex-col justify-between"
         >
-          <div aria-hidden className="absolute inset-0 [background:radial-gradient(60%_45%_at_50%_35%,color-mix(in_oklab,var(--orange-deep)_55%,transparent),transparent_75%)]" />
-          <div aria-hidden className="absolute inset-0 [background-image:repeating-linear-gradient(0deg,transparent_0_23px,color-mix(in_oklab,var(--gold)_7%,transparent)_23px_24px)] pointer-events-none z-0" />
+          {/* Ambient Warm Scanner Radial Glow */}
+          <div
+            aria-hidden
+            className="absolute inset-0 [background:radial-gradient(60%_45%_at_50%_35%,color-mix(in_oklab,var(--orange-deep)_55%,transparent),transparent_75%)]"
+          />
 
+          {/* Gridlines background */}
+          <div
+            aria-hidden
+            className="absolute inset-0 [background-image:repeating-linear-gradient(0deg,transparent_0_23px,color-mix(in_oklab,var(--gold)_7%,transparent)_23px_24px)] pointer-events-none z-0"
+          />
+
+          {/* Center Scan Visual: Gold Chain with Smooth Gold Scanning Line */}
           <div className="relative flex-1 flex items-center justify-center p-4 min-h-[200px] xs:min-h-[230px] sm:min-h-[270px] overflow-hidden">
             <img
               src={chain}
@@ -133,43 +117,32 @@ export function XRFTesting() {
               className="h-32 xs:h-40 sm:h-48 w-auto object-contain opacity-95 drop-shadow-[0_25px_45px_rgba(0,0,0,0.85)] z-0"
             />
 
-            {isMobile ? (
-              // Mobile: CSS keyframe animation — beam sweeps top to bottom once on inView
-              <div
-                aria-hidden
-                className="absolute inset-x-0 pointer-events-none z-10 flex flex-col items-center"
-                style={{
-                  top: "4%",
-                  animation: inView ? "xrf-scan 2.8s ease-in-out forwards" : "none",
-                }}
-              >
-                <div className="h-5 w-full [background:linear-gradient(180deg,transparent_0%,rgba(212,175,55,0.09)_100%)]" />
-                <div className="relative h-[2px] w-full bg-gradient-to-r from-transparent via-gold to-transparent shadow-[0_0_8px_rgba(212,175,55,0.7)]">
-                  <div className="absolute left-1/2 -top-[1px] -translate-x-1/2 h-[4px] w-14 rounded-full bg-gold-light/90 shadow-[0_0_8px_rgba(255,215,0,0.6)]" />
-                </div>
-                <div className="h-4 w-full [background:linear-gradient(180deg,rgba(212,175,55,0.07)_0%,transparent_100%)]" />
+            {/* Smooth, Refined Gold Scanning Line - Moves cleanly up and down equal to scroll level */}
+            <motion.div
+              aria-hidden
+              style={{ top: beamY }}
+              className="absolute inset-x-0 pointer-events-none z-10 flex flex-col items-center"
+            >
+              {/* Soft ambient upper gold wash */}
+              <div className="h-5 sm:h-7 w-full [background:linear-gradient(180deg,transparent_0%,rgba(212,175,55,0.09)_100%)]" />
+              
+              {/* Refined Gold Laser Line (warm gold, soft elegance, not blindingly bright) */}
+              <div className="relative h-[1.5px] sm:h-[2px] w-full bg-gradient-to-r from-transparent via-gold to-transparent shadow-[0_0_6px_rgba(212,175,55,0.6)]">
+                {/* Subtle warm gold center focus */}
+                <div className="absolute left-1/2 -top-[1px] sm:-top-[1.5px] -translate-x-1/2 h-[3.5px] sm:h-[4.5px] w-14 sm:w-16 rounded-full bg-gold-light/90 shadow-[0_0_6px_rgba(255,215,0,0.5)]" />
               </div>
-            ) : (
-              // Desktop: scroll-scrubbed position
-              <motion.div
-                aria-hidden
-                style={{ top: beamY }}
-                className="absolute inset-x-0 pointer-events-none z-10 flex flex-col items-center"
-              >
-                <div className="h-5 sm:h-7 w-full [background:linear-gradient(180deg,transparent_0%,rgba(212,175,55,0.09)_100%)]" />
-                <div className="relative h-[1.5px] sm:h-[2px] w-full bg-gradient-to-r from-transparent via-gold to-transparent shadow-[0_0_6px_rgba(212,175,55,0.6)]">
-                  <div className="absolute left-1/2 -top-[1px] sm:-top-[1.5px] -translate-x-1/2 h-[3.5px] sm:h-[4.5px] w-14 sm:w-16 rounded-full bg-gold-light/90 shadow-[0_0_6px_rgba(255,215,0,0.5)]" />
-                </div>
-                <div className="h-4 sm:h-5 w-full [background:linear-gradient(180deg,rgba(212,175,55,0.07)_0%,transparent_100%)]" />
-              </motion.div>
-            )}
+
+              {/* Soft ambient lower gold wash */}
+              <div className="h-4 sm:h-5 w-full [background:linear-gradient(180deg,rgba(212,175,55,0.07)_0%,transparent_100%)]" />
+            </motion.div>
           </div>
 
-          {/* Readout — solid bg, no backdrop-blur */}
-          <div className="relative z-20 border-t border-gold/20 bg-[rgba(18,3,0,0.92)] p-4 sm:p-5">
+          {/* Direct Readout at bottom with animated purity & weight lines */}
+          <div className="relative z-20 border-t border-gold/20 bg-ink/85 backdrop-blur-md p-4 sm:p-5">
             <p className="text-xs sm:text-sm font-semibold text-ivory drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">German XRF Purity Analysis</p>
 
             <div className="mt-3 space-y-3.5">
+              {/* Purity Reading */}
               <div className="text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.14em] text-ivory/80">
                 <div className="flex justify-between items-center gap-2">
                   <span className="text-ivory/70">Purity Reading</span>
@@ -178,20 +151,14 @@ export function XRFTesting() {
                   </span>
                 </div>
                 <div className="mt-1.5 h-1.5 sm:h-2 w-full rounded-full bg-ivory/10 overflow-hidden">
-                  {isMobile ? (
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-amber via-gold to-gold-light shadow-[0_0_8px_rgba(212,175,55,0.4)] transition-[width] duration-[1400ms] ease-out"
-                      style={{ width: inView ? "91.6%" : "0%" }}
-                    />
-                  ) : (
-                    <motion.div
-                      style={{ width: purityWidth }}
-                      className="h-full rounded-full bg-gradient-to-r from-amber via-gold to-gold-light shadow-[0_0_8px_rgba(212,175,55,0.4)]"
-                    />
-                  )}
+                  <motion.div
+                    style={{ width: purityWidth }}
+                    className="h-full rounded-full bg-gradient-to-r from-amber via-gold to-gold-light shadow-[0_0_8px_rgba(212,175,55,0.4)]"
+                  />
                 </div>
               </div>
 
+              {/* Weight */}
               <div className="text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.14em] text-ivory/80">
                 <div className="flex justify-between items-center gap-2">
                   <span className="text-ivory/70">Weight</span>
@@ -200,17 +167,10 @@ export function XRFTesting() {
                   </span>
                 </div>
                 <div className="mt-1.5 h-1.5 sm:h-2 w-full rounded-full bg-ivory/10 overflow-hidden">
-                  {isMobile ? (
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-amber via-gold to-gold-light shadow-[0_0_8px_rgba(212,175,55,0.4)] transition-[width] duration-[1600ms] ease-out delay-200"
-                      style={{ width: inView ? "85%" : "0%" }}
-                    />
-                  ) : (
-                    <motion.div
-                      style={{ width: weightWidth }}
-                      className="h-full rounded-full bg-gradient-to-r from-amber via-gold to-gold-light shadow-[0_0_8px_rgba(212,175,55,0.4)]"
-                    />
-                  )}
+                  <motion.div
+                    style={{ width: weightWidth }}
+                    className="h-full rounded-full bg-gradient-to-r from-amber via-gold to-gold-light shadow-[0_0_8px_rgba(212,175,55,0.4)]"
+                  />
                 </div>
               </div>
             </div>
@@ -221,11 +181,10 @@ export function XRFTesting() {
   );
 }
 
-// ─── Valuation ───────────────────────────────────────────────────────────────
 export function Valuation() {
   return (
     <Section id="valuation" labelledBy="valuation-title" className="veil">
-      <GoldParticles className="opacity-40" density={isMobile ? 0 : 0.4} />
+      <GoldParticles className="opacity-40" density={0.4} />
       <div className="relative mx-auto max-w-5xl text-center">
         <SectionHeading
           align="center"
@@ -242,11 +201,11 @@ export function Valuation() {
           ].map((item, i) => (
             <motion.div
               key={item.k}
-              initial={{ opacity: 0, y: isMobile ? 0 : 24 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: isMobile ? 0 : i * 0.1, duration: 0.6 }}
-              className="rounded-xl border border-gold/25 bg-[rgba(18,3,0,0.85)] p-4.5 sm:p-6 shadow-xl"
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="glass-panel rounded-xl p-4.5 sm:p-6 shadow-xl"
             >
               <p className="eyebrow text-xs drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">{item.k}</p>
               <p className="mt-2 sm:mt-3 text-base sm:text-lg font-bold text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">{item.v}</p>
@@ -255,7 +214,7 @@ export function Valuation() {
         </div>
 
         <Reveal delay={0.2}>
-          <div className="relative mx-auto mt-8 sm:mt-12 max-w-lg overflow-hidden rounded-2xl border border-gold/30 bg-ink/80 p-6 sm:p-10 light-sweep shadow-2xl">
+          <div className="relative mx-auto mt-8 sm:mt-12 max-w-lg overflow-hidden rounded-2xl border border-gold/30 bg-ink/80 p-6 sm:p-10 light-sweep backdrop-blur-md shadow-2xl">
             <img
               src={goldBar}
               alt="Gold bar representing assessed value"
