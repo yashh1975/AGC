@@ -3,14 +3,6 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-// On mobile, skip Y-translate in whileInView animations.
-// Y-animations trigger synchronous layout reflows on iOS during scroll, causing stutter.
-const skipY =
-  typeof window !== "undefined" &&
-  (window.innerWidth < 768 ||
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-
-
 export const goldButton = cva(
   "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-sans text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 disabled:pointer-events-none disabled:opacity-60 touch-manipulation select-none active:scale-[0.98]",
   {
@@ -70,7 +62,7 @@ export function SectionHeading({
 }) {
   return (
     <motion.header
-      initial={{ opacity: 0, y: skipY ? 0 : 20 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -106,10 +98,10 @@ export function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: skipY ? 0 : 16 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.45, delay: skipY ? 0 : Math.min(delay, 0.2), ease: "easeOut" }}
+      transition={{ duration: 0.45, delay: Math.min(delay, 0.2), ease: "easeOut" }}
       className={className}
     >
       {children}
