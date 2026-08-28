@@ -111,8 +111,8 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    overflow-x: clip;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 
   /* Only enable smooth scrolling on desktop devices with hover to avoid iOS touch drag snapbacks */
@@ -128,10 +128,10 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: clip;
     width: 100%;
     min-height: 100%;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 
   a,

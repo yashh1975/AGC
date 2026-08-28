@@ -20,20 +20,27 @@ export function Navbar() {
 
   useEffect(() => {
     const ids = navLinks.map((l) => l.href.slice(1));
+    let frameId = 0;
     const obs = new IntersectionObserver(
       (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActive(`#${visible.target.id}`);
+        cancelAnimationFrame(frameId);
+        frameId = requestAnimationFrame(() => {
+          const visible = entries
+            .filter((e) => e.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible) setActive(`#${visible.target.id}`);
+        });
       },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5] },
+      { rootMargin: "-30% 0px -30% 0px", threshold: 0.2 },
     );
     ids.forEach((id) => {
       const el = document.getElementById(id);
       if (el) obs.observe(el);
     });
-    return () => obs.disconnect();
+    return () => {
+      cancelAnimationFrame(frameId);
+      obs.disconnect();
+    };
   }, []);
 
   useEffect(() => {

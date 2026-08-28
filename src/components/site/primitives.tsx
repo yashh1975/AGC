@@ -124,7 +124,7 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={cn("relative scroll-mt-20 overflow-hidden px-4 py-14 xs:px-5 xs:py-20 sm:px-8 sm:py-24 lg:py-32", className)}
+      className={cn("relative scroll-mt-20 px-4 py-14 xs:px-5 xs:py-20 sm:px-8 sm:py-24 lg:py-32", className)}
     >
       {children}
     </section>
