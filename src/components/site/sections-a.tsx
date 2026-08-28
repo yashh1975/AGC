@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Arrow, GoldLink, Reveal, Section, SectionHeading } from "./primitives";
-import { GoldParticles } from "./GoldParticles";
 import { services, trustBar, type ServiceKey } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import necklace from "@/assets/jewel-necklace.png";
@@ -9,6 +8,8 @@ import ring from "@/assets/jewel-ring.png";
 import bangle from "@/assets/jewel-bangle.png";
 import earrings from "@/assets/jewel-earrings.png";
 import chain from "@/assets/jewel-chain.png";
+
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
 export function TrustBar() {
   return (
@@ -18,10 +19,10 @@ export function TrustBar() {
         {trustBar.map((item, i) => (
           <motion.li
             key={item}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: isMobile ? 0 : 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.45 }}
+            transition={{ delay: isMobile ? 0 : i * 0.05, duration: 0.4 }}
             className="flex items-center gap-1.5 sm:gap-2 text-[0.58rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.22em] text-ivory/90 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
           >
             <span aria-hidden className="h-1 w-1 rotate-45 bg-gold shrink-0 shadow-[0_0_6px_var(--gold)]" />
@@ -38,7 +39,8 @@ export function BrandIntro() {
     <Section id="about" labelledBy="about-title" className="veil">
       <div aria-hidden className="absolute inset-0 grain" />
       <div className="relative mx-auto grid max-w-7xl items-stretch gap-6 lg:gap-8 lg:grid-cols-2">
-        <div className="glass-panel rounded-2xl border border-gold/25 bg-ink/85 p-5 xs:p-7 sm:p-10 backdrop-blur-md shadow-2xl flex flex-col justify-between h-full">
+        {/* Glass panel — solid bg, no backdrop-blur (expensive GPU layer on iOS) */}
+        <div className="rounded-2xl border border-gold/25 bg-[rgba(18,3,0,0.88)] p-5 xs:p-7 sm:p-10 shadow-2xl flex flex-col justify-between h-full">
           <div>
             <SectionHeading
               eyebrow="Anjaneya Gold Company"
@@ -69,7 +71,7 @@ export function BrandIntro() {
           </Reveal>
         </div>
 
-        {/* Feature Cards Column - Stretched to equal height */}
+        {/* Feature Cards Column */}
         <div className="flex flex-col justify-between gap-3 sm:gap-4 h-full">
           {[
             {
@@ -90,11 +92,12 @@ export function BrandIntro() {
           ].map((feat, i) => (
             <motion.div
               key={feat.title}
-              initial={{ opacity: 0, x: 20 }}
+              /* Mobile: opacity only — no X translate to avoid layout reflow */
+              initial={{ opacity: 0, x: isMobile ? 0 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="flex-1 flex flex-col justify-center glass-panel rounded-xl border border-gold/20 bg-ink/75 p-4 sm:p-5 backdrop-blur-md transition-all hover:border-gold/50 shadow-xl"
+              transition={{ delay: isMobile ? 0 : i * 0.1, duration: 0.5 }}
+              className="flex-1 flex flex-col justify-center rounded-xl border border-gold/20 bg-[rgba(18,3,0,0.82)] p-4 sm:p-5 transition-all hover:border-gold/50 shadow-xl"
             >
               <div className="flex items-center justify-between">
                 <span className="text-[0.58rem] sm:text-[0.6rem] font-mono uppercase tracking-[0.18em] text-gold bg-gold/15 border border-gold/30 px-2.5 py-0.5 rounded">
@@ -172,7 +175,7 @@ export function Services() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35 }}
+                          transition={{ duration: 0.3 }}
                           className="overflow-hidden pl-7 sm:pl-9 pt-2.5 sm:pt-3 text-xs sm:text-sm leading-relaxed text-ivory/80 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
                         >
                           {s.copy}
@@ -185,15 +188,15 @@ export function Services() {
             })}
           </ul>
 
-          <div className="relative h-full min-h-[22rem] sm:min-h-[26rem] overflow-hidden rounded-2xl border border-gold/25 bg-ink/75 backdrop-blur-md shadow-2xl">
-            <GoldParticles density={0.35} />
+          {/* Service visual panel — no blur filter in AnimatePresence (kills GPU on mobile) */}
+          <div className="relative h-full min-h-[22rem] sm:min-h-[26rem] overflow-hidden rounded-2xl border border-gold/25 bg-ink/75 shadow-2xl">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeKey || "default"}
-                initial={{ opacity: 0, scale: 0.94, filter: "blur(12px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 1.05, filter: "blur(12px)" }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.03 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 flex flex-col items-center justify-center p-5 sm:p-8"
               >
                 <img
@@ -208,9 +211,9 @@ export function Services() {
                   {active.steps.map((step, i) => (
                     <motion.li
                       key={step}
-                      initial={{ opacity: 0, y: 10 }}
+                      initial={{ opacity: 0, y: isMobile ? 0 : 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.15 + i * 0.1 }}
+                      transition={{ delay: 0.1 + i * 0.07 }}
                       className="flex items-center gap-2 sm:gap-3 text-[0.52rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-ivory/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
                     >
                       {step}

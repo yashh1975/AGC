@@ -3,6 +3,13 @@ import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
+// Detect mobile once at module load — no reactive state needed.
+// On mobile, skip Y/X translate in whileInView to prevent layout reflows mid-scroll.
+// CSS transforms on elements entering the viewport force synchronous style recalculation on iOS.
+const isMobile =
+  typeof window !== "undefined" &&
+  (window.innerWidth < 768 || window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
 export const goldButton = cva(
   "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full font-sans text-xs font-bold uppercase tracking-[0.18em] transition-all duration-300 disabled:pointer-events-none disabled:opacity-60 touch-manipulation select-none active:scale-[0.98]",
   {
@@ -12,7 +19,7 @@ export const goldButton = cva(
         ember:
           "text-ivory shadow-[0_8px_25px_rgba(180,60,10,0.35)] hover:-translate-y-0.5 border border-gold/35 [background:rgba(140,45,5,0.65)] hover:[background:rgba(180,60,10,0.85)]",
         outline:
-          "border border-gold/40 bg-[rgba(120,35,4,0.45)] text-ivory hover:border-gold hover:bg-[rgba(160,50,6,0.65)] hover:-translate-y-0.5 backdrop-blur-sm",
+          "border border-gold/40 bg-[rgba(120,35,4,0.45)] text-ivory hover:border-gold hover:bg-[rgba(160,50,6,0.65)] hover:-translate-y-0.5",
         ghost: "text-ivory/90 hover:text-gold",
       },
       size: {
@@ -62,10 +69,10 @@ export function SectionHeading({
 }) {
   return (
     <motion.header
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: isMobile ? 0 : 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: isMobile ? 0.3 : 0.5, ease: "easeOut" }}
       className={cn(
         "max-w-3xl",
         align === "center" && "mx-auto text-center",
@@ -98,10 +105,10 @@ export function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.45, delay: Math.min(delay, 0.2), ease: "easeOut" }}
+      transition={{ duration: 0.4, delay: isMobile ? 0 : Math.min(delay, 0.2), ease: "easeOut" }}
       className={className}
     >
       {children}

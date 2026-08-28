@@ -44,11 +44,29 @@ export function Navbar() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) {
+      // Restore scroll position on menu close (iOS-safe unlock)
+      const top = parseInt(document.body.style.top || "0", 10);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, -top);
+      return;
+    }
+    // Lock body using position:fixed — preserves iOS native scroll thread for the overlay
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
     return () => {
-      document.body.style.overflow = "";
+      const top = parseInt(document.body.style.top || "0", 10);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, -top);
     };
   }, [open]);
+
 
   return (
     <>

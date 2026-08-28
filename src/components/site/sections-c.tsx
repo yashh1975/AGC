@@ -7,12 +7,14 @@ import { whyUs } from "@/lib/site";
 import necklace from "@/assets/jewel-necklace.png";
 import earrings from "@/assets/jewel-earrings.png";
 
+const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
 export function PledgedGold() {
   return (
     <Section id="pledged-gold" labelledBy="pledged-title" className="veil">
       <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-14 lg:grid-cols-2">
-        <div className="relative order-2 aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/25 bg-ink/75 p-6 backdrop-blur-md shadow-2xl vignette lg:order-1">
-          <GoldParticles density={0.3} />
+        <div className="relative order-2 aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/25 bg-ink/75 p-6 shadow-2xl vignette lg:order-1">
+          <GoldParticles density={isMobile ? 0 : 0.3} />
           <img
             src={necklace}
             alt="Gold necklace released from pledge"
@@ -93,11 +95,11 @@ export function RepledgeGold() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
+          initial={{ opacity: 0, scale: isMobile ? 1 : 0.94 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/20 bg-ink/75 p-6 backdrop-blur-md shadow-2xl vignette"
+          transition={{ duration: 0.7 }}
+          className="relative aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/20 bg-ink/75 p-6 shadow-2xl vignette"
         >
           <img
             src={earrings}
@@ -115,9 +117,13 @@ export function RepledgeGold() {
 
 export function MobileService() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 40%"] });
-  const vanX = useTransform(scrollYProgress, [0, 1], ["4%", "78%"]);
-  const pathScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  // On mobile: skip useScroll to avoid continuous scroll listeners causing jank
+  const { scrollYProgress } = useScroll({
+    target: isMobile ? undefined : ref,
+    offset: ["start 85%", "end 40%"],
+  });
+  const vanX = useTransform(scrollYProgress, [0, 1], isMobile ? ["40%", "40%"] : ["4%", "78%"]);
+  const pathScale = useTransform(scrollYProgress, [0, 1], isMobile ? [0.4, 0.4] : [0, 1]);
 
   return (
     <Section id="mobile-service" labelledBy="mobile-title" className="veil">
@@ -131,9 +137,9 @@ export function MobileService() {
 
         <div
           ref={ref}
-          className="relative mt-10 sm:mt-14 overflow-hidden rounded-2xl border border-gold/25 bg-ink/80 p-5 xs:p-6 sm:p-12 backdrop-blur-md vignette shadow-2xl"
+          className="relative mt-10 sm:mt-14 overflow-hidden rounded-2xl border border-gold/25 bg-ink/80 p-5 xs:p-6 sm:p-12 vignette shadow-2xl"
         >
-          <GoldParticles density={0.3} />
+          <GoldParticles density={isMobile ? 0 : 0.3} />
           <div className="relative h-20 sm:h-28">
             <div aria-hidden className="absolute inset-x-0 top-1/2 h-px bg-ink/40" />
             <motion.div
@@ -194,13 +200,12 @@ export function WhyUs() {
             return (
               <motion.article
                 key={item.title}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: isMobile ? 0 : 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.6 }}
+                transition={{ delay: isMobile ? 0 : i * 0.08, duration: 0.5 }}
                 className="group relative bg-ink/85 p-5 xs:p-6 sm:p-7 transition-colors duration-300 hover:bg-ink/95 shadow-xl flex flex-col justify-start"
               >
-                {/* Icon and Title in ONE single horizontal line */}
                 <div className="flex items-center gap-2.5 sm:gap-3">
                   <span className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg border border-gold/30 bg-gold/10 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
                     <Icon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-gold transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} aria-hidden />
@@ -210,7 +215,6 @@ export function WhyUs() {
                   </h3>
                 </div>
 
-                {/* Subtitle / copy directly below */}
                 <p className="mt-3 sm:mt-3.5 text-xs sm:text-xs leading-relaxed text-ivory/80 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
                   {item.copy}
                 </p>
@@ -238,12 +242,14 @@ export function YearsExperience() {
       aria-labelledby="years-title"
       className="relative overflow-hidden veil border-y border-gold/20 px-4 py-16 sm:py-28 text-center sm:px-8"
     >
-      <GoldParticles density={0.5} drift={0.3} />
+      <GoldParticles density={isMobile ? 0.15 : 0.5} drift={0.3} />
       <div className="relative mx-auto max-w-3xl">
+        {/* Removed filter:blur() — it forces GPU rasterization on every frame on iOS.
+            Using scale + opacity only, which stay on the compositor thread. */}
         <motion.p
-          initial={{ opacity: 0, scale: 0.85, filter: "blur(18px)" }}
-          animate={inView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.85, filter: "blur(18px)" }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, scale: 0.88 }}
+          animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.88 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl sm:text-8xl md:text-9xl font-bold leading-none text-gold-metal drop-shadow-[0_12px_40px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]"
         >
           20+

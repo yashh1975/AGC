@@ -239,7 +239,7 @@
 }
 
 @utility glass-panel {
-  background: rgba(36, 10, 2, 0.85);
+  background: rgba(18, 3, 0, 0.88);
   border: 1px solid rgba(226, 186, 85, 0.28);
   box-shadow: 0 16px 40px -12px rgba(18, 3, 0, 0.85);
   transform: translateZ(0);
