@@ -15,7 +15,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100vh] min-h-[100dvh] flex-col items-center justify-center px-4 py-16 sm:py-20 text-center overflow-hidden"
+      className="relative flex min-h-[100vh] min-h-[100dvh] flex-col items-center justify-center px-4 py-8 sm:py-20 text-center overflow-hidden"
       aria-label="Anjaneya Gold Company"
     >
       {/* 1. Radiant Terracotta-Amber Radiant Ambient Background (clean gradient without CPU blur filter) */}
@@ -23,7 +23,7 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden [transform:translate3d(0,0,0)]"
       >
-        <div className="absolute h-[120vmin] w-[120vmin] max-w-[1300px] max-h-[1300px] rounded-full [background:radial-gradient(circle_at_50%_46%,rgba(240,110,15,0.45)_0%,rgba(190,70,5,0.28)_25%,rgba(120,35,2,0.12)_50%,transparent_72%)]" />
+        <div className="absolute h-[120vmin] w-[120vmin] max-w-[1300px] max-h-[1300px] rounded-full [background:radial-gradient(circle_at_50%_50%,rgba(240,110,15,0.45)_0%,rgba(190,70,5,0.28)_25%,rgba(120,35,2,0.12)_50%,transparent_72%)]" />
         <div className="absolute top-[8%] right-[8%] h-[65vmin] w-[65vmin] rounded-full [background:radial-gradient(circle,rgba(255,140,20,0.30)_0%,rgba(200,80,10,0.12)_35%,transparent_65%)]" />
       </div>
 
@@ -32,20 +32,15 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-0 flex items-center justify-center [transform:translate3d(0,0,0)]"
       >
-        <div className="bangle-frame relative aspect-square h-[82vmin] w-[82vmin] max-w-[92vw] max-h-[92vw] rounded-full border border-gold/30 [box-shadow:0_0_40px_rgba(212,175,55,0.15),inset_0_0_50px_rgba(255,157,50,0.1)]">
+        <div className="bangle-frame relative aspect-square h-[80vmin] w-[80vmin] max-w-[88vw] max-h-[88vw] rounded-full border border-gold/30 [box-shadow:0_0_40px_rgba(212,175,55,0.15),inset_0_0_50px_rgba(255,157,50,0.1)]">
           <span className="absolute inset-[3%] rounded-full border border-gold/20" />
           {/* Exactly ONE gold point at top-right (1 o'clock) */}
           <span className="absolute top-[7%] right-[32%] h-2.5 w-2.5 rounded-full bg-gold shadow-[0_0_12px_#FFF0C2,0_0_20px_#FF9D32]" />
         </div>
       </div>
 
-      {/* 3. Central Content: Larger Logo -> Larger Heading -> Centered Buttons */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="relative z-10 flex flex-col items-center justify-center text-center w-full max-w-[380px] xs:max-w-[480px] sm:max-w-3xl md:max-w-4xl px-3 sm:px-6 [transform:translate3d(0,0,0)]"
-      >
+      {/* 3. Central Content: Perfectly Centered Stack */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center w-full max-w-[380px] xs:max-w-[480px] sm:max-w-3xl md:max-w-4xl px-3 sm:px-6 [transform:translate3d(0,0,0)]">
         {/* Logo - Adaptive Responsive Sizing */}
         <img
           src={logo}
@@ -87,7 +82,7 @@ export function Hero() {
             Call Us
           </GoldLink>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

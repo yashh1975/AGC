@@ -72,19 +72,12 @@ export function XRFTesting() {
     offset: ["start 85%", "end 15%"],
   });
   
-  // Smooth spring physics ensuring line and meters move in precise, buttery-smooth sync with scrolling
-  const smooth = useSpring(scrollYProgress, {
-    stiffness: 90,
-    damping: 24,
-    mass: 0.2,
-  });
-  
-  // Maps 1:1 with user scroll position across the full height of the gold chain
-  const beamY = useTransform(smooth, [0, 1], ["4%", "86%"]);
+  // Maps 1:1 with user scroll position across the full height of the gold chain without CPU spring physics
+  const beamY = useTransform(scrollYProgress, [0, 1], ["4%", "86%"]);
 
   // Proportional smooth fill for purity and weight meters based on scroll level
-  const purityWidth = useTransform(smooth, [0.06, 0.55], ["0%", "91.6%"]);
-  const weightWidth = useTransform(smooth, [0.1, 0.6], ["0%", "85%"]);
+  const purityWidth = useTransform(scrollYProgress, [0.06, 0.55], ["0%", "91.6%"]);
+  const weightWidth = useTransform(scrollYProgress, [0.1, 0.6], ["0%", "85%"]);
 
   return (
     <Section id="gold-testing" labelledBy="xrf-title" className="veil">
