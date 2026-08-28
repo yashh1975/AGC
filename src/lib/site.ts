@@ -12,7 +12,7 @@ export const business = {
   whatsappMessage:
     "Hello Anjaneya Gold Company, I would like to enquire about your gold services.",
   email: "anjaneyagoldcompany@gmail.com",
-  facebook: "https://www.facebook.com/share/14muWN5xhMJ/",
+  facebook: "https://www.facebook.com/share/1dTzBBy1Pv/",
   instagram: "https://www.instagram.com/anjaneyagoldcompany",
   addressLines: [
     "#20, 1st Floor,",
