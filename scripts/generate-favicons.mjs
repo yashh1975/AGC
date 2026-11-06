@@ -31,10 +31,13 @@ async function main() {
     { name: "favicon-16x16.png", size: 16 },
     { name: "favicon-32x32.png", size: 32 },
     { name: "favicon-48x48.png", size: 48 },
-    { name: "favicon.png", size: 32 },
-    { name: "apple-touch-icon.png", size: 180 },
+    { name: "favicon-96x96.png", size: 96 },
+    { name: "favicon-144x144.png", size: 144 },
     { name: "favicon-192x192.png", size: 192 },
     { name: "favicon-512x512.png", size: 512 },
+    { name: "favicon.png", size: 48 },
+    { name: "apple-touch-icon.png", size: 180 },
+    { name: "logo-circle.png", size: 512 },
   ];
 
   for (const item of iconSizes) {
@@ -97,7 +100,50 @@ async function main() {
     `Generated: favicon.ico containing [${icoSizes.join(", ")}] (${fullIco.length} bytes)`,
   );
 
-  console.log("All circular favicons generated successfully!");
+  // Generate official 1200x630 og-image.jpg banner with circular gold medallion centered
+  const ogWidth = 1200;
+  const ogHeight = 630;
+  const logoInOgSize = 340;
+
+  const resizedLogoForOg = await sharp(croppedMaster)
+    .resize(logoInOgSize, logoInOgSize, { fit: "contain" })
+    .png()
+    .toBuffer();
+
+  const ogSvgOverlay = Buffer.from(
+    `<svg width="${ogWidth}" height="${ogHeight}">
+      <defs>
+        <radialGradient id="grad" cx="50%" cy="50%" r="65%">
+          <stop offset="0%" stop-color="#3d0a00" />
+          <stop offset="60%" stop-color="#180500" />
+          <stop offset="100%" stop-color="#0a0200" />
+        </radialGradient>
+        <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e5c07b" />
+          <stop offset="50%" stop-color="#f5e1a4" />
+          <stop offset="100%" stop-color="#996515" />
+        </linearGradient>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grad)" />
+      <rect x="24" y="24" width="${ogWidth - 48}" height="${ogHeight - 48}" rx="20" fill="none" stroke="url(#goldBorder)" stroke-width="2" stroke-opacity="0.4" />
+      <circle cx="${ogWidth / 2}" cy="${ogHeight / 2}" r="${logoInOgSize / 2 + 10}" fill="none" stroke="url(#goldBorder)" stroke-width="3" stroke-opacity="0.8" />
+    </svg>`,
+  );
+
+  const ogDest = path.join(publicDir, "og-image.jpg");
+  await sharp(ogSvgOverlay)
+    .composite([
+      {
+        input: resizedLogoForOg,
+        top: Math.round((ogHeight - logoInOgSize) / 2),
+        left: Math.round((ogWidth - logoInOgSize) / 2),
+      },
+    ])
+    .jpeg({ quality: 90 })
+    .toFile(ogDest);
+  console.log(`Generated: og-image.jpg (1200x630 banner)`);
+
+  console.log("All icons and banners generated successfully!");
 }
 
 main().catch((err) => {

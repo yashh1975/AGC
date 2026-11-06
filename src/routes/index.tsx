@@ -41,6 +41,8 @@ const localBusiness = {
   disambiguatingDescription:
     "Anjaneya Gold Company (AGC) is an independent, established gold buying and pledged gold release company with over 20 years of experience, based in Nandini Layout, Bengaluru. Anjaneya Gold Company is NOT affiliated or associated with 'Anjaneya Gold Point' or any other entity.",
   url: canonical,
+  logo: "https://anjaneyagoldcompany.com/logo-circle.png",
+  image: "https://anjaneyagoldcompany.com/logo-circle.png",
   telephone: business.phone,
   email: business.email,
   priceRange: "₹₹₹",
