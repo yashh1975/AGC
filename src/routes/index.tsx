@@ -12,6 +12,7 @@ import {
   YearsExperience,
 } from "@/components/site/sections-c";
 import {
+  CoverageAreas,
   FAQ,
   Footer,
   QuoteAndContact,
@@ -20,18 +21,30 @@ import {
 } from "@/components/site/sections-d";
 import { business, faqs } from "@/lib/site";
 
-const title = "Anjaneya Gold Company | Sell Gold for Cash & Release Pledged Gold in Bangalore";
+const title =
+  "Anjaneya Gold Company (AGC) | Top Gold Buyers in Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan & Magadi";
 const description =
-  "Sell gold for cash in Bangalore with XRF purity testing, transparent valuation, pledged gold release, re-pledging and mobile gold service. 20+ years of experience.";
+  "Sell gold for instant cash or release pledged gold from banks with Anjaneya Gold Company (AGC). Serving Bengaluru, Tumakuru, Mysuru, Ramanagara, Kolar, Hassan & Magadi with 20+ years trust, German XRF 99% purity testing & doorstep mobile gold service.";
 const canonical = "https://anjaneyagoldcompany.com/";
 
 const localBusiness = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "FinancialService"],
   name: business.name,
+  legalName: "Anjaneya Gold Company",
+  alternateName: [
+    "AGC",
+    "Anjaneya Gold",
+    "AGC Gold",
+    "Anjaneya Gold Company Bangalore",
+    "Anjaneya Gold Company Karnataka",
+  ],
   url: canonical,
   telephone: business.phone,
   email: business.email,
+  priceRange: "₹₹₹",
+  currenciesAccepted: "INR",
+  paymentAccepted: "Bank Transfer, Instant Cash, IMPS, NEFT, RTGS, UPI",
   address: {
     "@type": "PostalAddress",
     streetAddress:
@@ -41,7 +54,22 @@ const localBusiness = {
     addressRegion: "Karnataka",
     addressCountry: "IN",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 13.0135,
+    longitude: 77.5358,
+  },
   openingHours: "Mo-Sa 10:00-19:00",
+  areaServed: [
+    { "@type": "City", name: "Bengaluru" },
+    { "@type": "City", name: "Tumakuru" },
+    { "@type": "City", name: "Mysuru" },
+    { "@type": "City", name: "Ramanagara" },
+    { "@type": "City", name: "Kolar" },
+    { "@type": "City", name: "Hassan" },
+    { "@type": "City", name: "Magadi" },
+    { "@type": "AdministrativeArea", name: "Karnataka" },
+  ],
   description,
 };
 
@@ -60,11 +88,18 @@ export const Route = createFileRoute("/")({
     meta: [
       { title },
       { name: "description", content: description },
+      {
+        name: "keywords",
+        content:
+          "anjaneya gold company, agc, anjaneya gold, agc gold, sell gold for cash bangalore, gold buyers tumkur, release pledged gold mysuru, gold company ramanagar, gold buyers kolar, gold valuation hassan, mobile gold service magadi, sell gold karnataka, gold loan release near me, best gold rate bangalore tumkur mysore",
+      },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
       { property: "og:url", content: canonical },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
     ],
     links: [
       { rel: "canonical", href: canonical },
@@ -103,6 +138,7 @@ function Index() {
         <YearsExperience />
         <Testimonials />
         <FAQ />
+        <CoverageAreas />
         <QuoteAndContact />
       </main>
       <div className="relative z-10">

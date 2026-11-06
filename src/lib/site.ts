@@ -41,6 +41,7 @@ export const navLinks = [
   { label: "Services", href: "#services" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Why Us", href: "#why-us" },
+  { label: "Coverage", href: "#coverage" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ] as const;
@@ -209,6 +210,77 @@ export const faqs = [
   {
     q: "What if I am not satisfied with the valuation after the release of gold?",
     a: "Your satisfaction is our priority. If you are not satisfied with the valuation after your pledged gold has been released, you are under no obligation to sell. We believe in complete transparency and fair dealings.",
+  },
+  {
+    q: "Where does Anjaneya Gold Company (AGC) offer services across Karnataka?",
+    a: "Anjaneya Gold Company operates from our central branch in Nandini Layout, Bengaluru, and provides dedicated doorstep mobile gold service and pledged gold release across Bengaluru, Tumakuru (Tumkur), Mysuru (Mysore), Ramanagara, Kolar, Hassan, Magadi, and surrounding Karnataka districts. Whether you are selling gold or releasing pledged gold from a bank, our mobile team comes directly to your location.",
+  },
+  {
+    q: "How can I release pledged gold if I am located in Tumkur, Mysuru, Ramanagara, Kolar, Hassan, or Magadi?",
+    a: "Our mobile gold team travels directly to your location with portable German XRF testing equipment. We coordinate directly with your local bank or financier branch to clear the outstanding loan amount, safely release your gold jewellery, verify purity and weight on the spot, and transfer the remaining cash balance directly to your bank account immediately.",
+  },
+  {
+    q: "Is Anjaneya Gold Company also known as AGC or Anjaneya Gold?",
+    a: "Yes, Anjaneya Gold Company is widely known as AGC and Anjaneya Gold. With over 20 years of experience across Karnataka, we are recognized for honest gold valuation, zero service charges, certified German XRF 99% purity testing, and instant digital payment transfers.",
+  },
+] as const;
+
+export const serviceAreas = [
+  {
+    city: "Bengaluru",
+    displayName: "Bengaluru (Bangalore)",
+    badge: "Central Branch & Express Mobile",
+    description:
+      "Visit our Nandini Layout headquarters or book express doorstep mobile gold service across all Bengaluru zones.",
+    services: ["Branch Valuation", "Doorstep Service", "Pledged Gold Release", "XRF Testing"],
+  },
+  {
+    city: "Tumakuru",
+    displayName: "Tumakuru (Tumkur)",
+    badge: "Doorstep Mobile Service",
+    description:
+      "On-site gold purity verification with German XRF analyzers and quick settlement for bank pledged gold in Tumkur.",
+    services: ["Doorstep Gold Buying", "Bank Pledge Clearance", "Spot Bank Transfer"],
+  },
+  {
+    city: "Mysuru",
+    displayName: "Mysuru (Mysore)",
+    badge: "Mobile & Pledge Settlement",
+    description:
+      "Complete loan payoff assistance for pledged gold in Mysuru banks and financial institutions with transparent valuation.",
+    services: ["Pledged Gold Release", "Accurate Valuation", "Direct Bank Payout"],
+  },
+  {
+    city: "Ramanagara",
+    displayName: "Ramanagara",
+    badge: "Fast Mobile Unit",
+    description:
+      "Rapid doorstep service across Ramanagara district for instant gold selling, evaluation, and loan closure assistance.",
+    services: ["Doorstep Testing", "Instant Cash Transfer", "Zero Service Charge"],
+  },
+  {
+    city: "Kolar",
+    displayName: "Kolar",
+    badge: "Doorstep Gold Buying",
+    description:
+      "Certified weight and purity evaluation with top market rates and pledged gold retrieval assistance in Kolar.",
+    services: ["Loan Payoff Assistance", "Purity Verification", "Instant Settlement"],
+  },
+  {
+    city: "Hassan",
+    displayName: "Hassan",
+    badge: "Pledge Release & Valuation",
+    description:
+      "Expert assistance in clearing gold loans from cooperative banks, nationalized banks, and private lenders in Hassan.",
+    services: ["Bank Pledge Settlement", "German XRF Check", "Market Rate Offer"],
+  },
+  {
+    city: "Magadi",
+    displayName: "Magadi",
+    badge: "Rapid Response Unit",
+    description:
+      "Convenient gold selling and doorstep purity evaluation with instant payment for residents in and around Magadi.",
+    services: ["Express Mobile Service", "Transparent Pricing", "Immediate Transfer"],
   },
 ] as const;
 

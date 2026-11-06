@@ -70,16 +70,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "theme-color", content: "#180500" },
       { name: "format-detection", content: "telephone=no" },
-      { title: "Anjaneya Gold Company | Sell Gold for Cash & Release Pledged Gold in Bangalore" },
+      {
+        title:
+          "Anjaneya Gold Company (AGC) | Top Gold Buyers in Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan & Magadi",
+      },
       {
         name: "description",
         content:
-          "Bangalore's trusted gold buyers with 20+ years of experience. Sell gold for instant cash, release pledged gold from banks, German XRF 99% purity testing & doorstep mobile gold service in Bengaluru.",
+          "Sell gold for instant cash or release pledged gold from banks with Anjaneya Gold Company (AGC). Serving Bengaluru, Tumakuru, Mysuru, Ramanagara, Kolar, Hassan & Magadi with 20+ years trust, German XRF 99% purity testing & doorstep mobile gold service.",
       },
       {
         name: "keywords",
         content:
-          "sell gold for cash bangalore, release pledged gold bangalore, gold buyers nandini layout, gold valuation bangalore, xrf gold testing bangalore, mobile gold service bangalore, best gold rate bangalore, anjaneya gold company",
+          "anjaneya gold company, agc, anjaneya gold, agc gold, sell gold for cash bangalore, gold buyers tumkur, release pledged gold mysuru, gold company ramanagar, gold buyers kolar, gold valuation hassan, mobile gold service magadi, sell gold karnataka, gold loan release near me, best gold rate bangalore tumkur mysore",
       },
       { name: "author", content: "Anjaneya Gold Company" },
       {
@@ -87,27 +90,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
       },
       { name: "geo.region", content: "IN-KA" },
-      { name: "geo.placename", content: "Bengaluru, Nandini Layout" },
+      {
+        name: "geo.placename",
+        content: "Bengaluru, Tumakuru, Mysuru, Ramanagara, Kolar, Hassan, Magadi, Karnataka",
+      },
       { name: "geo.position", content: "13.0135;77.5358" },
       { name: "ICBM", content: "13.0135, 77.5358" },
       {
         property: "og:title",
-        content: "Anjaneya Gold Company | Sell Gold for Cash & Release Pledged Gold in Bangalore",
+        content:
+          "Anjaneya Gold Company (AGC) | Top Gold Buyers in Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan & Magadi",
       },
       {
         property: "og:description",
         content:
-          "Get maximum value for your gold in Bangalore. German XRF 99% purity check, instant bank transfer, pledged gold release, and mobile gold service at your doorstep.",
+          "Get maximum value for your gold with Anjaneya Gold Company (AGC). German XRF 99% purity check, instant bank transfer, pledged gold release, and mobile gold service across Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan, and Magadi.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://anjaneyagoldcompany.com/" },
       { property: "og:image", content: "https://anjaneyagoldcompany.com/og-image.jpg" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Anjaneya Gold Company | Sell Gold for Cash in Bangalore" },
+      {
+        name: "twitter:title",
+        content:
+          "Anjaneya Gold Company (AGC) | Top Gold Buyers in Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan & Magadi",
+      },
       {
         name: "twitter:description",
         content:
-          "Bangalore's trusted gold buyer: instant cash for gold, release pledged gold from banks, German XRF testing, doorstep mobile gold service.",
+          "Bangalore & Karnataka's trusted gold buyers: instant cash for gold, release pledged gold from banks, German XRF testing, doorstep mobile service across Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan, and Magadi.",
       },
       { name: "twitter:image", content: "https://anjaneyagoldcompany.com/og-image.jpg" },
     ],
