@@ -12,7 +12,6 @@ import {
   YearsExperience,
 } from "@/components/site/sections-c";
 import {
-  CoverageAreas,
   FAQ,
   Footer,
   QuoteAndContact,
@@ -140,7 +139,6 @@ function Index() {
         <YearsExperience />
         <Testimonials />
         <FAQ />
-        <CoverageAreas />
         <QuoteAndContact />
       </main>
       <div className="relative z-10">

@@ -2,15 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Mail, MapPin, MessageCircle, Phone, X } from "lucide-react";
 import { Arrow, GoldLink, Section, SectionHeading } from "./primitives";
-import {
-  business,
-  faqs,
-  mapsDirections,
-  mapsEmbed,
-  serviceAreas,
-  testimonials,
-  whatsappHref,
-} from "@/lib/site";
+import { business, faqs, mapsDirections, mapsEmbed, testimonials, whatsappHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/logo.jpg";
 
@@ -138,81 +130,6 @@ export function Testimonials() {
             </motion.li>
           ))}
         </ul>
-      </div>
-    </Section>
-  );
-}
-
-export function CoverageAreas() {
-  return (
-    <Section id="coverage" labelledBy="coverage-title" className="veil">
-      <div aria-hidden className="absolute inset-0 grain" />
-      <div className="relative mx-auto max-w-7xl">
-        <SectionHeading
-          align="center"
-          eyebrow="Service Areas across Karnataka"
-          title={
-            <span id="coverage-title">
-              Gold buying &amp; pledged gold release in{" "}
-              <span className="text-gold-metal">Bengaluru, Tumakuru, Mysuru &amp; beyond.</span>
-            </span>
-          }
-          copy="Whether you visit our flagship Nandini Layout branch or request our certified mobile gold team, Anjaneya Gold Company provides transparent valuation, German XRF testing, and instant bank transfers across major Karnataka districts."
-        />
-
-        <div className="mt-10 sm:mt-14 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {serviceAreas.map((area, idx) => (
-            <motion.div
-              key={area.city}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: (idx % 4) * 0.08, duration: 0.5 }}
-              className="relative flex flex-col justify-between overflow-hidden rounded-2xl border border-gold/25 bg-[rgba(18,3,0,0.85)] p-5 sm:p-6 shadow-xl"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-gold shrink-0" aria-hidden />
-                    <h3 className="font-display text-sm sm:text-base font-bold uppercase tracking-wide text-ivory">
-                      {area.displayName}
-                    </h3>
-                  </div>
-                </div>
-
-                <span className="mt-2 inline-block rounded-full border border-gold/30 bg-gold/10 px-2.5 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-gold-light">
-                  {area.badge}
-                </span>
-
-                <p className="mt-3 text-xs leading-relaxed text-ivory/80">{area.description}</p>
-
-                <div className="mt-3 flex flex-wrap gap-1.5">
-                  {area.services.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded bg-ivory/5 px-2 py-0.5 text-[0.58rem] font-medium text-ivory/70 border border-ivory/10"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-5 border-t border-gold/15 pt-3">
-                <a
-                  href={`https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
-                    `Hello Anjaneya Gold Company, I would like to enquire about gold services / doorstep service in ${area.displayName}.`,
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[0.68rem] font-bold uppercase tracking-wider text-gold hover:text-gold-light transition-colors"
-                >
-                  Book for {area.city} <Arrow />
-                </a>
-              </div>
-            </motion.div>
-          ))}
-        </div>
       </div>
     </Section>
   );
