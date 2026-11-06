@@ -223,6 +223,10 @@ export const faqs = [
     q: "Is Anjaneya Gold Company also known as AGC or Anjaneya Gold?",
     a: "Yes, Anjaneya Gold Company is widely known as AGC and Anjaneya Gold. With over 20 years of experience across Karnataka, we are recognized for honest gold valuation, zero service charges, certified German XRF 99% purity testing, and instant digital payment transfers.",
   },
+  {
+    q: "Is Anjaneya Gold Company affiliated with 'Anjaneya Gold Point'?",
+    a: "No. Anjaneya Gold Company (AGC) is a completely independent gold buying and pledged gold release company with over 20 years of experience, operating from Nandini Layout, Bengaluru. We have no affiliation, partnership, or connection with 'Anjaneya Gold Point' or any similarly named entity. Always verify our official phone number (+91 90084 77669) and address (#20, 1st Floor, Sarasvathipuram Main Road, Nandini Layout, Bengaluru) to ensure you are transacting with the authentic Anjaneya Gold Company.",
+  },
 ] as const;
 
 export const serviceAreas = [
