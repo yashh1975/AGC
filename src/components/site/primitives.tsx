@@ -73,11 +73,7 @@ export function SectionHeading({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: isMobile ? 0.3 : 0.5, ease: "easeOut" }}
-      className={cn(
-        "max-w-3xl",
-        align === "center" && "mx-auto text-center",
-        className,
-      )}
+      className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}
     >
       {eyebrow ? (
         <p className="eyebrow mb-2.5 sm:mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">{eyebrow}</p>
@@ -131,7 +127,10 @@ export function Section({
     <section
       id={id}
       aria-labelledby={labelledBy}
-      className={cn("relative scroll-mt-20 px-4 py-14 xs:px-5 xs:py-20 sm:px-8 sm:py-24 lg:py-32", className)}
+      className={cn(
+        "relative scroll-mt-20 px-4 py-14 xs:px-5 xs:py-20 sm:px-8 sm:py-24 lg:py-32",
+        className,
+      )}
     >
       {children}
     </section>

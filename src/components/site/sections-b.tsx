@@ -29,7 +29,10 @@ export function HowItWorks() {
         />
 
         <div ref={ref} className="relative mt-12 sm:mt-16">
-          <div aria-hidden className="absolute bottom-0 left-5 sm:left-7 top-0 w-0.5 -translate-x-1/2 bg-gold/15" />
+          <div
+            aria-hidden
+            className="absolute bottom-0 left-5 sm:left-7 top-0 w-0.5 -translate-x-1/2 bg-gold/15"
+          />
           <motion.div
             aria-hidden
             style={{ scaleY: lineScale }}
@@ -71,7 +74,7 @@ export function XRFTesting() {
     target: ref,
     offset: ["start 85%", "end 15%"],
   });
-  
+
   // Maps 1:1 with user scroll position across the full height of the gold chain without CPU spring physics
   const beamY = useTransform(scrollYProgress, [0, 1], ["4%", "86%"]);
 
@@ -125,7 +128,7 @@ export function XRFTesting() {
             >
               {/* Soft ambient upper gold wash */}
               <div className="h-5 sm:h-7 w-full [background:linear-gradient(180deg,transparent_0%,rgba(212,175,55,0.09)_100%)]" />
-              
+
               {/* Refined Gold Laser Line (warm gold, soft elegance, not blindingly bright) */}
               <div className="relative h-[1.5px] sm:h-[2px] w-full bg-gradient-to-r from-transparent via-gold to-transparent shadow-[0_0_6px_rgba(212,175,55,0.6)]">
                 {/* Subtle warm gold center focus */}
@@ -139,7 +142,9 @@ export function XRFTesting() {
 
           {/* Direct Readout at bottom with animated purity & weight lines */}
           <div className="relative z-20 border-t border-gold/20 bg-ink/85 backdrop-blur-md p-4 sm:p-5">
-            <p className="text-xs sm:text-sm font-semibold text-ivory drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">German XRF Purity Analysis</p>
+            <p className="text-xs sm:text-sm font-semibold text-ivory drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+              German XRF Purity Analysis
+            </p>
 
             <div className="mt-3 space-y-3.5">
               {/* Purity Reading */}
@@ -208,7 +213,9 @@ export function Valuation() {
               className="glass-panel rounded-xl p-4.5 sm:p-6 shadow-xl"
             >
               <p className="eyebrow text-xs drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">{item.k}</p>
-              <p className="mt-2 sm:mt-3 text-base sm:text-lg font-bold text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">{item.v}</p>
+              <p className="mt-2 sm:mt-3 text-base sm:text-lg font-bold text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
+                {item.v}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -223,14 +230,21 @@ export function Valuation() {
               loading="lazy"
               className="mx-auto h-24 sm:h-28 w-auto object-contain drop-shadow-[0_24px_40px_rgba(0,0,0,0.45)]"
             />
-            <p className="relative mt-4 sm:mt-6 font-display text-2xl sm:text-3xl font-bold text-ivory drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">Your Valuation</p>
+            <p className="relative mt-4 sm:mt-6 font-display text-2xl sm:text-3xl font-bold text-ivory drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+              Your Valuation
+            </p>
             <p className="relative mt-2 text-xs leading-relaxed text-ivory/85 px-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
               Final valuation is subject to physical inspection, purity testing, weight verification
               and applicable market conditions.
             </p>
           </div>
           <div className="mt-8 sm:mt-10">
-            <GoldLink href="#contact" variant="gold" size="lg" className="touch-manipulation text-xs px-6 py-3.5 font-bold">
+            <GoldLink
+              href="#contact"
+              variant="gold"
+              size="lg"
+              className="touch-manipulation text-xs px-6 py-3.5 font-bold"
+            >
               Know What Your Gold Is Worth <Arrow />
             </GoldLink>
           </div>

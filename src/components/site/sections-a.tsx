@@ -25,7 +25,10 @@ export function TrustBar() {
             transition={{ delay: isMobile ? 0 : i * 0.05, duration: 0.4 }}
             className="flex items-center gap-1.5 sm:gap-2 text-[0.58rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.22em] text-ivory/90 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
           >
-            <span aria-hidden className="h-1 w-1 rotate-45 bg-gold shrink-0 shadow-[0_0_6px_var(--gold)]" />
+            <span
+              aria-hidden
+              className="h-1 w-1 rotate-45 bg-gold shrink-0 shadow-[0_0_6px_var(--gold)]"
+            />
             {item}
           </motion.li>
         ))}
@@ -61,10 +64,18 @@ export function BrandIntro() {
           </div>
           <Reveal delay={0.25} className="mt-6 sm:mt-8">
             <div className="flex flex-wrap gap-2.5 sm:gap-3">
-              <GoldLink href="#services" variant="ember" className="touch-manipulation text-xs px-5 py-3">
+              <GoldLink
+                href="#services"
+                variant="ember"
+                className="touch-manipulation text-xs px-5 py-3"
+              >
                 Explore Our Services <Arrow />
               </GoldLink>
-              <GoldLink href="#how-it-works" variant="outline" className="touch-manipulation text-xs px-5 py-3">
+              <GoldLink
+                href="#how-it-works"
+                variant="outline"
+                className="touch-manipulation text-xs px-5 py-3"
+              >
                 See How It Works
               </GoldLink>
             </div>
@@ -108,7 +119,9 @@ export function BrandIntro() {
               <h4 className="mt-2 font-display text-sm sm:text-base font-bold uppercase tracking-[0.06em] text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                 {feat.title}
               </h4>
-              <p className="mt-1 text-xs leading-relaxed text-ivory/80 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">{feat.desc}</p>
+              <p className="mt-1 text-xs leading-relaxed text-ivory/80 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+                {feat.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -139,7 +152,11 @@ export function Services() {
         />
 
         <div className="mt-10 sm:mt-14 grid gap-8 sm:gap-10 lg:grid-cols-[1fr_1.1fr] items-stretch">
-          <ul className="flex flex-col justify-between gap-2.5 sm:gap-3 h-full" role="tablist" aria-label="Gold services">
+          <ul
+            className="flex flex-col justify-between gap-2.5 sm:gap-3 h-full"
+            role="tablist"
+            aria-label="Gold services"
+          >
             {services.map((s) => {
               const isActive = s.key === activeKey;
               return (
@@ -218,14 +235,22 @@ export function Services() {
                     >
                       {step}
                       {i < active.steps.length - 1 ? (
-                        <span aria-hidden className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+                        <span
+                          aria-hidden
+                          className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
+                        >
                           →
                         </span>
                       ) : null}
                     </motion.li>
                   ))}
                 </ol>
-                <GoldLink href="#contact" variant="gold" size="sm" className="mt-6 sm:mt-8 touch-manipulation font-bold">
+                <GoldLink
+                  href="#contact"
+                  variant="gold"
+                  size="sm"
+                  className="mt-6 sm:mt-8 touch-manipulation font-bold"
+                >
                   {active.cta} <Arrow />
                 </GoldLink>
               </motion.div>

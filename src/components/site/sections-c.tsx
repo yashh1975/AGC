@@ -22,16 +22,21 @@ export function PledgedGold() {
             className="absolute inset-0 m-auto h-[55%] sm:h-[62%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
           />
           <ol className="absolute inset-x-3 xs:inset-x-5 bottom-3 xs:bottom-5 flex flex-wrap justify-center gap-x-2.5 sm:gap-x-3 gap-y-1 text-[0.52rem] sm:text-[0.55rem] font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-ivory/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-            {["Pledged Gold", "Document", "Verification", "Release", "Transaction"].map((s, i, a) => (
-              <li key={s} className="flex items-center gap-2 sm:gap-3">
-                {s}
-                {i < a.length - 1 ? (
-                  <span aria-hidden className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
-                    →
-                  </span>
-                ) : null}
-              </li>
-            ))}
+            {["Pledged Gold", "Document", "Verification", "Release", "Transaction"].map(
+              (s, i, a) => (
+                <li key={s} className="flex items-center gap-2 sm:gap-3">
+                  {s}
+                  {i < a.length - 1 ? (
+                    <span
+                      aria-hidden
+                      className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
+                    >
+                      →
+                    </span>
+                  ) : null}
+                </li>
+              ),
+            )}
           </ol>
         </div>
 
@@ -40,13 +45,18 @@ export function PledgedGold() {
             eyebrow="Release Pledged Gold"
             title={
               <span id="pledged-title">
-                Your gold is yours. <span className="text-gold-metal">Let&apos;s help you get it back.</span>
+                Your gold is yours.{" "}
+                <span className="text-gold-metal">Let&apos;s help you get it back.</span>
               </span>
             }
             copy="We specialise in releasing pledged gold from banks and other finance companies through a verified, transparent process."
           />
           <div className="mt-6 sm:mt-8">
-            <GoldLink href="#contact" variant="ember" className="touch-manipulation text-xs px-5 py-3 font-bold">
+            <GoldLink
+              href="#contact"
+              variant="ember"
+              className="touch-manipulation text-xs px-5 py-3 font-bold"
+            >
               Learn About Gold Release <Arrow />
             </GoldLink>
           </div>
@@ -73,7 +83,10 @@ export function RepledgeGold() {
                 <span key={s} className="flex items-center gap-2.5 sm:gap-4">
                   {s}
                   {i < a.length - 1 ? (
-                    <span aria-hidden className="text-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+                    <span
+                      aria-hidden
+                      className="text-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
+                    >
                       →
                     </span>
                   ) : null}
@@ -85,7 +98,11 @@ export function RepledgeGold() {
               evaluation and approval.
             </p>
             <div className="mt-6 sm:mt-8">
-              <GoldLink href="#contact" variant="gold" className="touch-manipulation text-xs px-5 py-3 font-bold">
+              <GoldLink
+                href="#contact"
+                variant="gold"
+                className="touch-manipulation text-xs px-5 py-3 font-bold"
+              >
                 Enquire Now <Arrow />
               </GoldLink>
             </div>
@@ -142,7 +159,10 @@ export function MobileService() {
               className="absolute inset-x-0 top-1/2 h-px origin-left bg-gold-light shadow-[0_0_16px_var(--gold)]"
             />
             <motion.div style={{ left: vanX }} className="absolute top-1/2 -translate-y-1/2">
-              <Truck className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]" aria-hidden />
+              <Truck
+                className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]"
+                aria-hidden
+              />
             </motion.div>
             <MapPin
               className="absolute right-2 sm:right-4 top-1/2 h-6 w-6 sm:h-7 sm:w-7 -translate-y-full text-ivory drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
@@ -156,7 +176,10 @@ export function MobileService() {
                 <li key={s} className="flex items-center gap-2 sm:gap-4">
                   {s}
                   {i < a.length - 1 ? (
-                    <span aria-hidden className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+                    <span
+                      aria-hidden
+                      className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
+                    >
                       →
                     </span>
                   ) : null}
@@ -166,7 +189,11 @@ export function MobileService() {
           </ol>
 
           <div className="relative mt-7 sm:mt-9 text-center">
-            <GoldLink href="#contact" variant="gold" className="touch-manipulation text-xs px-5 py-3 font-bold">
+            <GoldLink
+              href="#contact"
+              variant="gold"
+              className="touch-manipulation text-xs px-5 py-3 font-bold"
+            >
               Book Mobile Service <Arrow />
             </GoldLink>
           </div>
@@ -203,7 +230,11 @@ export function WhyUs() {
                 {/* Icon and Title in ONE single horizontal line */}
                 <div className="flex items-center gap-2.5 sm:gap-3">
                   <span className="flex h-8 w-8 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-lg border border-gold/30 bg-gold/10 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
-                    <Icon className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-gold transition-transform duration-300 group-hover:scale-110" strokeWidth={1.5} aria-hidden />
+                    <Icon
+                      className="h-4.5 w-4.5 sm:h-5 sm:w-5 text-gold transition-transform duration-300 group-hover:scale-110"
+                      strokeWidth={1.5}
+                      aria-hidden
+                    />
                   </span>
                   <h3 className="font-display text-xs xs:text-sm sm:text-sm font-bold uppercase tracking-[0.06em] text-ivory drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] leading-snug">
                     {item.title}
@@ -242,7 +273,11 @@ export function YearsExperience() {
       <div className="relative mx-auto max-w-3xl">
         <motion.p
           initial={{ opacity: 0, scale: 0.85, filter: "blur(18px)" }}
-          animate={inView ? { opacity: 1, scale: 1, filter: "blur(0px)" } : { opacity: 0, scale: 0.85, filter: "blur(18px)" }}
+          animate={
+            inView
+              ? { opacity: 1, scale: 1, filter: "blur(0px)" }
+              : { opacity: 0, scale: 0.85, filter: "blur(18px)" }
+          }
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl sm:text-8xl md:text-9xl font-bold leading-none text-gold-metal drop-shadow-[0_12px_40px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]"
         >
@@ -254,7 +289,9 @@ export function YearsExperience() {
         >
           Years of Experience
         </h2>
-        <p className="mt-2 sm:mt-4 font-display text-lg sm:text-2xl text-gold-light/95 drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]">Turning gold into value.</p>
+        <p className="mt-2 sm:mt-4 font-display text-lg sm:text-2xl text-gold-light/95 drop-shadow-[0_3px_12px_rgba(0,0,0,0.95)]">
+          Turning gold into value.
+        </p>
       </div>
     </section>
   );

@@ -37,7 +37,10 @@ export function GoldJourney() {
     if (!el) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     gsap.registerPlugin(ScrollTrigger);
-    ScrollTrigger.config({ ignoreMobileResize: true, autoRefreshEvents: "visibilitychange,DOMContentLoaded,load" });
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+    });
 
     let ctx: gsap.Context | null = null;
     let timerId: number | undefined;
@@ -52,7 +55,7 @@ export function GoldJourney() {
       ctx = gsap.context(() => {
         const q = gsap.utils.selector(el);
         const isMobile = window.innerWidth < 768;
-        const R = Math.min(window.innerWidth, window.innerHeight) * (isMobile ? 0.20 : 0.28);
+        const R = Math.min(window.innerWidth, window.innerHeight) * (isMobile ? 0.2 : 0.28);
 
         // ---- Strict initial state: ONLY bangle is visible at start ----
         gsap.set(
@@ -115,10 +118,19 @@ export function GoldJourney() {
         // Furnace heat -> melting -> casting -> 999.9 Solid Gold Bar
         // =========================================================================
         tl.fromTo(q(".gj-heat"), { autoAlpha: 0 }, { autoAlpha: 0.35, duration: 3 }, 48);
-        tl.fromTo(q(".gj-furnace"), { autoAlpha: 0, scale: 0.5 }, { autoAlpha: 0.4, scale: 1, duration: 3 }, 48);
+        tl.fromTo(
+          q(".gj-furnace"),
+          { autoAlpha: 0, scale: 0.5 },
+          { autoAlpha: 0.4, scale: 1, duration: 3 },
+          48,
+        );
 
         // ALL 5 Ornaments (bangle + ring + chain + earrings + necklace) converge into the furnace heat chamber
-        tl.to(q(".gj-jewel, .gj-bangle"), { x: 0, y: 0, scale: 0.75, duration: 3.5, ease: "power2.inOut" }, 50);
+        tl.to(
+          q(".gj-jewel, .gj-bangle"),
+          { x: 0, y: 0, scale: 0.75, duration: 3.5, ease: "power2.inOut" },
+          50,
+        );
 
         // Melting into liquid gold (scale & fade into heat chamber)
         tl.to(
@@ -126,10 +138,20 @@ export function GoldJourney() {
           { scaleY: 0.35, scaleX: 1.2, autoAlpha: 0, duration: 3, ease: "power2.in" },
           53.5,
         );
-        tl.fromTo(q(".gj-molten"), { autoAlpha: 0, scale: 0.4 }, { autoAlpha: 0.55, scale: 1, duration: 2.5 }, 54.5);
+        tl.fromTo(
+          q(".gj-molten"),
+          { autoAlpha: 0, scale: 0.4 },
+          { autoAlpha: 0.55, scale: 1, duration: 2.5 },
+          54.5,
+        );
 
         // Molten stream pours into mould
-        tl.fromTo(q(".gj-mould"), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 2 }, 56.5);
+        tl.fromTo(
+          q(".gj-mould"),
+          { autoAlpha: 0, y: 50 },
+          { autoAlpha: 1, y: 0, duration: 2 },
+          56.5,
+        );
         tl.to(q(".gj-pour"), { scaleY: 1, duration: 2 }, 57);
         tl.to(q(".gj-molten"), { autoAlpha: 0, y: 80, scale: 0.4, duration: 2 }, 58);
         tl.to(q(".gj-fill"), { scaleY: 1, duration: 2 }, 58);
@@ -138,7 +160,14 @@ export function GoldJourney() {
         tl.fromTo(
           q(".gj-bar"),
           { autoAlpha: 0, y: 60, scale: 0.6, rotate: -8 },
-          { autoAlpha: 1, y: 0, scale: isMobile ? 0.95 : 1.05, rotate: 3, duration: 3.5, ease: "power2.out" },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: isMobile ? 0.95 : 1.05,
+            rotate: 3,
+            duration: 3.5,
+            ease: "power2.out",
+          },
           60,
         );
         tl.to(q(".gj-mould"), { autoAlpha: 0, y: 60, duration: 2 }, 62);
@@ -152,14 +181,23 @@ export function GoldJourney() {
         tl.to(q(".gj-bar"), { rotate: -4, y: -10, duration: 15 }, 64);
 
         // Soft, subtle golden energy burst around the bar
-        tl.fromTo(q(".gj-burst"), { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 0.4, scale: isMobile ? 1.05 : 1.2, duration: 3 }, 74);
+        tl.fromTo(
+          q(".gj-burst"),
+          { autoAlpha: 0, scale: 0.6 },
+          { autoAlpha: 0.4, scale: isMobile ? 1.05 : 1.2, duration: 3 },
+          74,
+        );
 
         // =========================================================================
         // PHASE 5 (80–96%): TESTIMONIALS — Gold Bar converts directly to Hands with Money
         // Direct Transformation: Gold Bar -> Customer Hands Holding Money
         // =========================================================================
         // Gold Bar dissolves cleanly with scale & opacity (100% reversible)
-        tl.to(q(".gj-bar"), { autoAlpha: 0, scale: 1.18, y: -18, duration: 2.5, ease: "power2.in" }, 78.5);
+        tl.to(
+          q(".gj-bar"),
+          { autoAlpha: 0, scale: 1.18, y: -18, duration: 2.5, ease: "power2.in" },
+          78.5,
+        );
 
         // Golden burst pulse
         tl.to(q(".gj-burst"), { autoAlpha: 0.65, scale: 1.35, duration: 1.5 }, 78.5);
@@ -212,7 +250,11 @@ export function GoldJourney() {
     "gj-jewel absolute h-[18vh] max-w-[40vw] sm:h-[32vh] sm:max-w-[50vw] w-auto object-contain [filter:drop-shadow(0_10px_25px_rgba(212,175,55,0.4))] [transform:translate3d(0,0,0)] [backface-visibility:hidden] will-change-[opacity,transform] transform-gpu opacity-0 invisible";
 
   return (
-    <div ref={root} aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu [contain:paint]">
+    <div
+      ref={root}
+      aria-hidden
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden transform-gpu [contain:paint]"
+    >
       {/* Background ambience — vibrant warm terracotta-amber radiance matching reference image */}
       <div className="absolute inset-0 [background:radial-gradient(ellipse_115%_95%_at_50%_46%,#c85305_0%,#9e3902_28%,#662002_55%,#380f01_80%,#180500_100%)] [transform:translate3d(0,0,0)]" />
       <div className="absolute inset-0 [background:radial-gradient(circle_at_82%_32%,rgba(245,120,20,0.38)_0%,transparent_60%)]" />
@@ -295,7 +337,10 @@ export function GoldJourney() {
           style={{ opacity: 0, visibility: "hidden" }}
           className="gj-furnace pointer-events-none absolute h-[32vh] w-[32vh] sm:h-[38vh] sm:w-[38vh] opacity-0 invisible"
         >
-          <svg viewBox="0 0 200 200" className="h-full w-full drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]">
+          <svg
+            viewBox="0 0 200 200"
+            className="h-full w-full drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]"
+          >
             <circle
               cx="100"
               cy="100"

@@ -67,7 +67,6 @@ export function Navbar() {
     };
   }, [open]);
 
-
   return (
     <>
       <header
@@ -130,7 +129,12 @@ export function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
-            <GoldLink href="#contact" variant="gold" size="sm" className="hidden sm:inline-flex font-bold">
+            <GoldLink
+              href="#contact"
+              variant="gold"
+              size="sm"
+              className="hidden sm:inline-flex font-bold"
+            >
               Contact Us <Arrow />
             </GoldLink>
             <button
@@ -199,10 +203,21 @@ export function Navbar() {
               ))}
             </ul>
             <div className="relative mt-6 flex flex-col gap-3 px-6 pb-[calc(2.5rem+env(safe-area-inset-bottom))]">
-              <GoldLink href="#contact" variant="gold" size="lg" className="w-full text-center touch-manipulation font-bold" onClick={() => setOpen(false)}>
+              <GoldLink
+                href="#contact"
+                variant="gold"
+                size="lg"
+                className="w-full text-center touch-manipulation font-bold"
+                onClick={() => setOpen(false)}
+              >
                 Contact Us <Arrow />
               </GoldLink>
-              <GoldLink href={business.phoneHref} variant="outline" size="lg" className="w-full text-center touch-manipulation font-bold">
+              <GoldLink
+                href={business.phoneHref}
+                variant="outline"
+                size="lg"
+                className="w-full text-center touch-manipulation font-bold"
+              >
                 Call {business.phone}
               </GoldLink>
             </div>

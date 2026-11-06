@@ -35,6 +35,7 @@ A premium, modern digital platform for **Anjaneya Gold Company** — Bengaluru's
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js (v18+ recommended)
 - npm or pnpm
 

@@ -51,51 +51,38 @@
 
   /* Brand palette matching reference image: Terracotta Amber / Glowing Copper / Metallic Gold */
   --ink: #120300; /* deep dark warm espresso */
-  --primary: #D45705; /* radiant warm terracotta-orange */
-  --primary-foreground: #FFF8F0;
-  --orange-deep: #9E3500;
+  --primary: #d45705; /* radiant warm terracotta-orange */
+  --primary-foreground: #fff8f0;
+  --orange-deep: #9e3500;
   --orange-burnt: #662002;
-  --amber: #FF9D32;
-  --gold: #E2BA55;
-  --gold-light: #FFF0C2;
-  --ivory: #FFF8F0;
+  --amber: #ff9d32;
+  --gold: #e2ba55;
+  --gold-light: #fff0c2;
+  --ivory: #fff8f0;
 
   --background: #180500;
-  --foreground: #FFF8F0;
+  --foreground: #fff8f0;
   --card: #280b02;
-  --card-foreground: #FFF8F0;
+  --card-foreground: #fff8f0;
   --popover: #220801;
-  --popover-foreground: #FFF8F0;
+  --popover-foreground: #fff8f0;
   --secondary: #481402;
-  --secondary-foreground: #FFF8F0;
+  --secondary-foreground: #fff8f0;
   --muted: #360d02;
-  --muted-foreground: #DEB594;
-  --accent: #E2BA55;
+  --muted-foreground: #deb594;
+  --accent: #e2ba55;
   --accent-foreground: #120300;
   --destructive: #c0392b;
-  --destructive-foreground: #FFF8F0;
+  --destructive-foreground: #fff8f0;
   --border: rgba(226, 186, 85, 0.28);
   --input: #320c02;
-  --ring: #E2BA55;
+  --ring: #e2ba55;
 
   /* Lighting system */
-  --gradient-gloss: linear-gradient(
-    145deg,
-    #2a0a01 0%,
-    #662002 45%,
-    #a83c04 75%,
-    #360d01 100%
-  );
-  --gradient-gold: linear-gradient(
-    90deg,
-    #A87018 0%,
-    #ECC55F 45%,
-    #FFF2CA 55%,
-    #A87018 100%
-  );
+  --gradient-gloss: linear-gradient(145deg, #2a0a01 0%, #662002 45%, #a83c04 75%, #360d01 100%);
+  --gradient-gold: linear-gradient(90deg, #a87018 0%, #ecc55f 45%, #fff2ca 55%, #a87018 100%);
   --gradient-ink: linear-gradient(180deg, #120300 0%, #3a1002 55%, #120300 100%);
-  --glow-gold: 0 0 0 1px rgba(226, 186, 85, 0.4),
-    0 18px 60px -18px rgba(212, 87, 5, 0.7);
+  --glow-gold: 0 0 0 1px rgba(226, 186, 85, 0.4), 0 18px 60px -18px rgba(212, 87, 5, 0.7);
   --glow-soft: 0 24px 90px -30px rgba(255, 157, 50, 0.6);
 }
 
@@ -180,12 +167,12 @@
 @utility text-gold-metal {
   background: linear-gradient(
     105deg,
-    #FFFFFF 0%,
-    #FFF6E0 15%,
-    #FCE18B 35%,
-    #E2BA55 55%,
-    #FFF8E8 75%,
-    #E8BF5A 100%
+    #ffffff 0%,
+    #fff6e0 15%,
+    #fce18b 35%,
+    #e2ba55 55%,
+    #fff8e8 75%,
+    #e8bf5a 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -196,26 +183,14 @@
 
 @utility surface-gloss {
   background:
-    radial-gradient(
-      100% 80% at 50% 25%,
-      rgba(255, 157, 50, 0.24) 0%,
-      transparent 70%
-    ),
-    radial-gradient(
-      90% 70% at 80% 85%,
-      rgba(212, 87, 5, 0.32) 0%,
-      transparent 75%
-    ),
+    radial-gradient(100% 80% at 50% 25%, rgba(255, 157, 50, 0.24) 0%, transparent 70%),
+    radial-gradient(90% 70% at 80% 85%, rgba(212, 87, 5, 0.32) 0%, transparent 75%),
     var(--gradient-gloss);
 }
 
 @utility surface-ink {
   background:
-    radial-gradient(
-      80% 60% at 50% 0%,
-      rgba(212, 87, 5, 0.36) 0%,
-      transparent 70%
-    ),
+    radial-gradient(80% 60% at 50% 0%, rgba(212, 87, 5, 0.36) 0%, transparent 70%),
     var(--gradient-ink);
 }
 
@@ -225,11 +200,7 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(
-      90% 75% at 50% 50%,
-      transparent 35%,
-      rgba(18, 3, 0, 0.85) 100%
-    );
+    background: radial-gradient(90% 75% at 50% 50%, transparent 35%, rgba(18, 3, 0, 0.85) 100%);
   }
 }
 
@@ -261,7 +232,9 @@
   font-size: 0.6875rem;
   font-weight: 700;
   color: var(--gold);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 16px rgba(212, 175, 55, 0.35);
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.95),
+    0 0 16px rgba(212, 175, 55, 0.35);
 }
 
 @utility light-sweep {
@@ -326,7 +299,9 @@
 .veil h4,
 .veil h5,
 .veil h6 {
-  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.9);
+  text-shadow:
+    0 3px 18px rgba(0, 0, 0, 0.95),
+    0 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .veil p,
@@ -375,8 +350,16 @@ select option:checked {
 
 /* XRF scanner beam sweep — triggered once via inView on mobile */
 @keyframes xrf-scan {
-  0%   { top: 4%; }
-  50%  { top: 86%; }
-  80%  { top: 86%; }
-  100% { top: 86%; }
+  0% {
+    top: 4%;
+  }
+  50% {
+    top: 86%;
+  }
+  80% {
+    top: 86%;
+  }
+  100% {
+    top: 86%;
+  }
 }

@@ -9,8 +9,7 @@ export const business = {
   phone: "+91 90084 77669",
   phoneHref: "tel:+919008477669",
   whatsapp: "919008477669",
-  whatsappMessage:
-    "Hello Anjaneya Gold Company, I would like to enquire about your gold services.",
+  whatsappMessage: "Hello Anjaneya Gold Company, I would like to enquire about your gold services.",
   email: "anjaneyagoldcompany@gmail.com",
   facebook: "https://www.facebook.com/share/1dTzBBy1Pv/",
   instagram: "https://www.instagram.com/anjaneyagoldcompany",
@@ -22,8 +21,7 @@ export const business = {
     "Bengaluru - 560096, Karnataka.",
   ],
   timings: "10:00 AM – 7:00 PM, Monday to Saturday",
-  mapQuery:
-    "Anjaneya Gold Company, Saraswathipuram Main Road, Nandini Layout, Bengaluru 560096",
+  mapQuery: "Anjaneya Gold Company, Saraswathipuram Main Road, Nandini Layout, Bengaluru 560096",
 } as const;
 
 export const whatsappHref = `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
