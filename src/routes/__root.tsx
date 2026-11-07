@@ -71,13 +71,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#180500" },
       { name: "format-detection", content: "telephone=no" },
       {
-        title:
-          "Anjaneya Gold Company (AGC) | Top Gold Buyers in Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan & Magadi",
+        title: "Anjaneya Gold Company (AGC) | Top Gold Buyers in Karnataka",
       },
       {
         name: "description",
         content:
-          "Sell gold for instant cash or release pledged gold from banks with Anjaneya Gold Company (AGC). Serving Bengaluru, Tumakuru, Mysuru, Ramanagara, Kolar, Hassan & Magadi with 20+ years trust, German XRF 99% purity testing & doorstep mobile gold service.",
+          "Sell gold for instant cash & release pledged gold with Anjaneya Gold Company (AGC). 20+ yrs trust, German XRF testing & spot payment across Karnataka.",
       },
       {
         name: "keywords",
@@ -98,13 +97,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "ICBM", content: "13.0135, 77.5358" },
       {
         property: "og:title",
-        content:
-          "Anjaneya Gold Company (AGC) | Top Gold Buyers in Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan & Magadi",
+        content: "Anjaneya Gold Company (AGC) | Top Gold Buyers in Karnataka",
       },
       {
         property: "og:description",
         content:
-          "Get maximum value for your gold with Anjaneya Gold Company (AGC). German XRF 99% purity check, instant bank transfer, pledged gold release, and mobile gold service across Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan, and Magadi.",
+          "Sell gold for instant cash & release pledged gold with Anjaneya Gold Company (AGC). 20+ yrs trust, German XRF testing & spot payment across Karnataka.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://anjaneyagoldcompany.com/" },
@@ -112,13 +110,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       {
         name: "twitter:title",
-        content:
-          "Anjaneya Gold Company (AGC) | Top Gold Buyers in Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan & Magadi",
+        content: "Anjaneya Gold Company (AGC) | Top Gold Buyers in Karnataka",
       },
       {
         name: "twitter:description",
         content:
-          "Bangalore & Karnataka's trusted gold buyers: instant cash for gold, release pledged gold from banks, German XRF testing, doorstep mobile service across Bengaluru, Tumkur, Mysuru, Ramanagara, Kolar, Hassan, and Magadi.",
+          "Sell gold for instant cash & release pledged gold with Anjaneya Gold Company (AGC). 20+ yrs trust, German XRF testing & spot payment across Karnataka.",
       },
       { name: "twitter:image", content: "https://anjaneyagoldcompany.com/og-image.jpg" },
     ],
