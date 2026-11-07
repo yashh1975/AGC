@@ -216,19 +216,24 @@ export function Services() {
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 flex flex-col items-center justify-center p-5 sm:p-8"
               >
+                {/* Deep radial shadow behind jewelry so it stands out distinctly from the background */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 m-auto h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-black/85 blur-3xl -z-0"
+                />
                 <img
                   src={visual.src}
                   alt={visual.alt}
                   width={1024}
                   height={1024}
                   loading="lazy"
-                  className="h-36 sm:h-56 w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+                  className="relative z-10 h-36 sm:h-56 w-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.95)] drop-shadow-[0_0_30px_rgba(0,0,0,0.9)] drop-shadow-[0_0_60px_rgba(0,0,0,0.85)]"
                 />
                 <GoldLink
                   href="#contact"
                   variant="gold"
                   size="sm"
-                  className="mt-6 sm:mt-8 touch-manipulation font-bold"
+                  className="relative z-10 mt-6 sm:mt-8 touch-manipulation font-bold"
                 >
                   {active.cta} <Arrow />
                 </GoldLink>

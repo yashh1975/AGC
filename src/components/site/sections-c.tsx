@@ -13,13 +13,18 @@ export function PledgedGold() {
       <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-14 lg:grid-cols-2">
         <div className="relative order-2 aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/25 bg-transparent p-6 shadow-2xl lg:order-1">
           <GoldParticles density={0.3} />
+          {/* Deep radial shadow behind jewelry so it stands out distinctly from the background */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 m-auto h-48 w-48 sm:h-64 sm:w-64 rounded-full bg-black/85 blur-3xl -z-0"
+          />
           <img
             src={necklace}
             alt="Gold necklace released from pledge"
             width={1024}
             height={1024}
             loading="lazy"
-            className="absolute inset-0 m-auto h-[60%] sm:h-[70%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
+            className="relative z-10 absolute inset-0 m-auto h-[60%] sm:h-[70%] w-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.95)] drop-shadow-[0_0_30px_rgba(0,0,0,0.9)] drop-shadow-[0_0_60px_rgba(0,0,0,0.85)]"
           />
         </div>
 
@@ -80,13 +85,18 @@ export function RepledgeGold() {
           transition={{ duration: 0.8 }}
           className="relative aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/20 bg-transparent p-6 shadow-2xl"
         >
+          {/* Deep radial shadow behind jewelry so it stands out distinctly from the background */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 m-auto h-44 w-44 sm:h-60 sm:w-60 rounded-full bg-black/85 blur-3xl -z-0"
+          />
           <img
             src={earrings}
             alt="Gold earrings assessed for re-pledging"
             width={1024}
             height={1024}
             loading="lazy"
-            className="absolute inset-0 m-auto h-[55%] sm:h-[65%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
+            className="relative z-10 absolute inset-0 m-auto h-[55%] sm:h-[65%] w-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.95)] drop-shadow-[0_0_30px_rgba(0,0,0,0.9)] drop-shadow-[0_0_60px_rgba(0,0,0,0.85)]"
           />
         </motion.div>
       </div>
@@ -132,7 +142,7 @@ export function MobileService() {
                 className="absolute top-0 -translate-y-1/2 -translate-x-1/2 pointer-events-none"
               >
                 <Truck
-                  className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]"
+                  className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)] drop-shadow-[0_0_15px_rgba(0,0,0,0.85)]"
                   aria-hidden
                 />
               </motion.div>
