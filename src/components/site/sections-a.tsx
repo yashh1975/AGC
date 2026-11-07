@@ -205,8 +205,8 @@ export function Services() {
             })}
           </ul>
 
-          {/* Service visual panel — no blur filter in AnimatePresence (kills GPU on mobile) */}
-          <div className="relative h-full min-h-[22rem] sm:min-h-[26rem] overflow-hidden rounded-2xl border border-gold/25 bg-ink/75 shadow-2xl">
+          {/* Service visual panel — transparent card without step wording */}
+          <div className="relative h-full min-h-[22rem] sm:min-h-[26rem] overflow-hidden rounded-2xl border border-gold/25 bg-transparent shadow-2xl">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeKey || "default"}
@@ -222,29 +222,8 @@ export function Services() {
                   width={1024}
                   height={1024}
                   loading="lazy"
-                  className="h-32 sm:h-52 w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
+                  className="h-36 sm:h-56 w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
                 />
-                <ol className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-x-2.5 sm:gap-x-3 gap-y-1.5 sm:gap-y-2">
-                  {active.steps.map((step, i) => (
-                    <motion.li
-                      key={step}
-                      initial={{ opacity: 0, y: isMobile ? 0 : 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + i * 0.07 }}
-                      className="flex items-center gap-2 sm:gap-3 text-[0.52rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-ivory/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
-                    >
-                      {step}
-                      {i < active.steps.length - 1 ? (
-                        <span
-                          aria-hidden
-                          className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
-                        >
-                          →
-                        </span>
-                      ) : null}
-                    </motion.li>
-                  ))}
-                </ol>
                 <GoldLink
                   href="#contact"
                   variant="gold"

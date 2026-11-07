@@ -11,7 +11,7 @@ export function PledgedGold() {
   return (
     <Section id="pledged-gold" labelledBy="pledged-title" className="veil">
       <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-14 lg:grid-cols-2">
-        <div className="relative order-2 aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/25 bg-ink/75 p-6 backdrop-blur-md shadow-2xl vignette lg:order-1">
+        <div className="relative order-2 aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/25 bg-transparent p-6 shadow-2xl lg:order-1">
           <GoldParticles density={0.3} />
           <img
             src={necklace}
@@ -19,25 +19,8 @@ export function PledgedGold() {
             width={1024}
             height={1024}
             loading="lazy"
-            className="absolute inset-0 m-auto h-[55%] sm:h-[62%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
+            className="absolute inset-0 m-auto h-[60%] sm:h-[70%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
           />
-          <ol className="absolute inset-x-3 xs:inset-x-5 bottom-3 xs:bottom-5 flex flex-wrap justify-center gap-x-2.5 sm:gap-x-3 gap-y-1 text-[0.52rem] sm:text-[0.55rem] font-bold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-ivory/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-            {["Pledged Gold", "Document", "Verification", "Release", "Transaction"].map(
-              (s, i, a) => (
-                <li key={s} className="flex items-center gap-2 sm:gap-3">
-                  {s}
-                  {i < a.length - 1 ? (
-                    <span
-                      aria-hidden
-                      className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
-                    >
-                      →
-                    </span>
-                  ) : null}
-                </li>
-              ),
-            )}
-          </ol>
         </div>
 
         <div className="order-1 lg:order-2">
@@ -78,25 +61,6 @@ export function RepledgeGold() {
             copy="Need to re-pledge your gold for better terms or a higher loan amount? Our team helps you understand the options available to you."
           />
           <Reveal delay={0.12}>
-            <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-x-3 sm:gap-x-4 gap-y-2 text-[0.55rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.16em] sm:tracking-[0.2em] text-ivory/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-              {["Gold", "Assessment", "Re-Pledging"].map((s, i, a) => (
-                <span key={s} className="flex items-center gap-2.5 sm:gap-4">
-                  {s}
-                  {i < a.length - 1 ? (
-                    <span
-                      aria-hidden
-                      className="text-gold drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
-                    >
-                      →
-                    </span>
-                  ) : null}
-                </span>
-              ))}
-            </div>
-            <p className="mt-4 sm:mt-6 max-w-lg text-xs sm:text-sm text-ivory/80 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
-              Explore your options with our team. Any re-pledging is subject to applicable
-              evaluation and approval.
-            </p>
             <div className="mt-6 sm:mt-8">
               <GoldLink
                 href="#contact"
@@ -114,7 +78,7 @@ export function RepledgeGold() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/20 bg-ink/75 p-6 backdrop-blur-md shadow-2xl vignette"
+          className="relative aspect-auto min-h-[260px] sm:min-h-[340px] overflow-hidden rounded-2xl border border-gold/20 bg-transparent p-6 shadow-2xl"
         >
           <img
             src={earrings}
@@ -122,7 +86,7 @@ export function RepledgeGold() {
             width={1024}
             height={1024}
             loading="lazy"
-            className="absolute inset-0 m-auto h-[50%] sm:h-[55%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
+            className="absolute inset-0 m-auto h-[55%] sm:h-[65%] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]"
           />
         </motion.div>
       </div>
@@ -133,8 +97,8 @@ export function RepledgeGold() {
 export function MobileService() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 85%", "end 40%"] });
-  const vanX = useTransform(scrollYProgress, [0, 1], ["4%", "78%"]);
-  const pathScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  // Vehicle and gold progress line both follow the exact same progress [0%, 100%]
+  const travelProgress = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <Section id="mobile-service" labelledBy="mobile-title" className="veil">
@@ -148,45 +112,37 @@ export function MobileService() {
 
         <div
           ref={ref}
-          className="relative mt-10 sm:mt-14 overflow-hidden rounded-2xl border border-gold/25 bg-ink/80 p-5 xs:p-6 sm:p-12 backdrop-blur-md vignette shadow-2xl"
+          className="relative mt-10 sm:mt-14 overflow-hidden rounded-2xl border border-gold/25 bg-transparent p-5 xs:p-6 sm:p-12 shadow-2xl"
         >
           <GoldParticles density={0.3} />
-          <div className="relative h-20 sm:h-28">
-            <div aria-hidden className="absolute inset-x-0 top-1/2 h-px bg-ink/40" />
-            <motion.div
-              aria-hidden
-              style={{ scaleX: pathScale }}
-              className="absolute inset-x-0 top-1/2 h-px origin-left bg-gold-light shadow-[0_0_16px_var(--gold)]"
-            />
-            <motion.div style={{ left: vanX }} className="absolute top-1/2 -translate-y-1/2">
-              <Truck
-                className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]"
+          <div className="relative h-20 sm:h-28 flex items-center">
+            {/* Track running from left edge to destination pin */}
+            <div className="relative w-full mr-7 sm:mr-9">
+              {/* Inactive base rail */}
+              <div aria-hidden className="w-full h-px bg-gold/20" />
+              {/* Active gold line — width is locked to vehicle progress */}
+              <motion.div
                 aria-hidden
+                style={{ width: travelProgress }}
+                className="absolute left-0 top-0 h-px bg-gold-light shadow-[0_0_16px_var(--gold)]"
               />
-            </motion.div>
+              {/* Vehicle — position is locked to the exact same progress */}
+              <motion.div
+                style={{ left: travelProgress }}
+                className="absolute top-0 -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+              >
+                <Truck
+                  className="h-6 w-6 sm:h-8 sm:w-8 text-ivory drop-shadow-[0_6px_10px_rgba(0,0,0,0.5)]"
+                  aria-hidden
+                />
+              </motion.div>
+            </div>
+            {/* Destination Pin */}
             <MapPin
-              className="absolute right-2 sm:right-4 top-1/2 h-6 w-6 sm:h-7 sm:w-7 -translate-y-full text-ivory drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
+              className="h-6 w-6 sm:h-7 sm:w-7 text-gold shrink-0 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]"
               aria-hidden
             />
           </div>
-
-          <ol className="relative mt-4 sm:mt-6 flex flex-wrap justify-center gap-x-2.5 sm:gap-x-4 gap-y-2 text-[0.52rem] sm:text-[0.6rem] font-bold uppercase tracking-[0.14em] sm:tracking-[0.2em] text-ivory/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-            {["Arrival", "Gold Testing", "Valuation", "Documentation", "Transaction"].map(
-              (s, i, a) => (
-                <li key={s} className="flex items-center gap-2 sm:gap-4">
-                  {s}
-                  {i < a.length - 1 ? (
-                    <span
-                      aria-hidden
-                      className="text-gold-light drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]"
-                    >
-                      →
-                    </span>
-                  ) : null}
-                </li>
-              ),
-            )}
-          </ol>
 
           <div className="relative mt-7 sm:mt-9 text-center">
             <GoldLink
